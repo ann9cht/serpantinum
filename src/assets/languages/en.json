@@ -205,6 +205,26 @@
         "title": "Quickactions",
         "desc": "Enable floating quickactions overlay"
       },
+      "lunar": {
+        "title": "Vietnamese lunar calendar",
+        "desc": "Show lunar dates under each day in the calendar"
+      },
+      "lunar_canchi": {
+        "title": "Can Chi",
+        "desc": "Show day, month and year Can Chi when hovering a day"
+      },
+      "lunar_hoangdao": {
+        "title": "Auspicious hours",
+        "desc": "Show auspicious hours when hovering a day"
+      },
+      "lunar_tietkhi": {
+        "title": "Solar terms",
+        "desc": "Show the solar term when hovering a day"
+      },
+      "lunar_holidays": {
+        "title": "Lunar festivals",
+        "desc": "Mark festivals such as Tet and Trung Thu with a dot and show their names on hover"
+      },
       "location": {
         "title": "Location",
         "desc": "Configure location for automatic sun schedule and weather",
@@ -785,6 +805,23 @@
       "fr": "Fr",
       "sa": "Sa",
       "su": "Su"
+    },
+    "lunar": {
+      "date": "Lunar date",
+      "month": "month",
+      "leap": "leap",
+      "can_chi": "Can Chi",
+      "day_cc": "Day",
+      "month_cc": "Month",
+      "year_cc": "Year",
+      "solar_term": "Solar term",
+      "solar_term_starts": "starts today",
+      "gio_hoang_dao": "Auspicious hours",
+      "today": "today",
+      "tomorrow": "tomorrow",
+      "in": "in",
+      "days": "days",
+      "next_festival": "Next festival"
     }
   },
   "clipboard": {

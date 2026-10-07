@@ -7,6 +7,7 @@ import Quickshell.Io
 import QtQuick.Window
 import "../"
 import "../reusables"
+import "LunarCalendar.js" as Lunar
 
 Item {
     id: window
@@ -125,10 +126,12 @@ Item {
             forceActiveFocus();
             focusTimer.restart();
             window.currentTime = new Date();
+            refreshLunarSetting();
             updateCalendarGrid();
             Weather.refresh(false);
             resetAndPlayIntro();
         } else {
+            window.hoverIndex = -1;
             introAnim.stop();
             exitAnim.stop();
             weatherTransitionAnim.stop();
@@ -337,6 +340,123 @@ Item {
     property string targetMonthName: ""
     ListModel { id: calendarModel }
 
+    property bool lunarEnabled: false
+    property bool lunarShowCanChi: true
+    property bool lunarShowGioHoangDao: true
+    property bool lunarShowTietKhi: true
+    property bool lunarShowHolidays: true
+
+    function refreshLunarSetting() {
+        let gs = Config.getSetting("general", {});
+        let lang = gs.language !== undefined ? gs.language : I18n.currentLang;
+        window.lunarEnabled = (lang === "vi") && gs.lunarCalendar !== false;
+        window.lunarShowCanChi = gs.lunarCanChi !== false;
+        window.lunarShowGioHoangDao = gs.lunarGioHoangDao !== false;
+        window.lunarShowTietKhi = gs.lunarTietKhi !== false;
+        window.lunarShowHolidays = gs.lunarHolidays !== false;
+    }
+
+    onLunarEnabledChanged: updateCalendarGrid()
+    onLunarShowHolidaysChanged: updateCalendarGrid()
+
+    property int hoverIndex: -1
+    property real hoverY: 0
+    property string hoverTitle: ""
+    property var hoverInfo: null
+    property string hoverCountdown: ""
+    property var hoverNext: null
+    property var tipRows: buildTipRows(hoverInfo, hoverNext, lunarShowHolidays, lunarShowCanChi, lunarShowTietKhi, lunarShowGioHoangDao)
+
+    Timer {
+        id: hoverHideTimer
+        interval: 90
+        repeat: false
+        onTriggered: window.hoverIndex = -1
+    }
+
+    function lt(key, fallback) {
+        let full = "calendar.lunar." + key;
+        let v = I18n.t(full);
+        return (v && v !== full) ? v : fallback;
+    }
+
+    function pad2(n) {
+        return n < 10 ? "0" + n : "" + n;
+    }
+
+    function countdownText(days) {
+        if (days < 0) return "";
+        if (days === 0) return lt("today", "hôm nay");
+        if (days === 1) return lt("tomorrow", "ngày mai");
+        return lt("in", "còn") + " " + days + " " + lt("days", "ngày");
+    }
+
+    function buildTipRows(info, next, showHolidays, showCanChi, showTietKhi, showGio) {
+        if (!info) return [];
+        let rows = [];
+        let l = info.lunar;
+        rows.push({
+            label: lt("date", "Âm lịch"),
+            value: l.day + " " + lt("month", "tháng") + " " + l.month + (l.leap ? " " + lt("leap", "nhuận") : "")
+        });
+        if (showCanChi) {
+            rows.push({
+                label: lt("can_chi", "Can chi"),
+                value: lt("day_cc", "Ngày") + " " + info.dayCanChi + "\n"
+                     + lt("month_cc", "Tháng") + " " + info.monthCanChi + "\n"
+                     + lt("year_cc", "Năm") + " " + info.yearCanChi
+            });
+        }
+        if (showTietKhi) {
+            rows.push({
+                label: lt("solar_term", "Tiết khí"),
+                value: info.solarTerm + (info.solarTermStarts ? " (" + lt("solar_term_starts", "bắt đầu hôm nay") + ")" : "")
+            });
+        }
+        if (showGio) {
+            let hours = [];
+            for (let i = 0; i < info.gioHoangDao.length; i++) {
+                let h = info.gioHoangDao[i];
+                hours.push(h.chi + " (" + h.from + "–" + h.to + ")");
+            }
+            rows.push({ label: lt("gio_hoang_dao", "Giờ hoàng đạo"), value: hours.join(", ") });
+        }
+        if (showHolidays && next) {
+            rows.push({ label: lt("next_festival", "Lễ sắp tới"), value: next.name + " · " + countdownText(next.days) });
+        }
+        return rows;
+    }
+
+    function setHoverCell(idx, hovered, cellItem) {
+        if (!window.lunarEnabled) return;
+        if (hovered) {
+            hoverHideTimer.stop();
+            let m = calendarModel.get(idx);
+            if (!m) return;
+            let info = Lunar.getDayInfo(m.cellD, m.cellM, m.cellY, 7);
+            window.hoverTitle = info.weekday + ", " + pad2(m.cellD) + "/" + pad2(m.cellM) + "/" + m.cellY;
+            window.hoverInfo = info;
+
+            let now = new Date();
+            let todayJd = Lunar.jdFromDate(now.getDate(), now.getMonth() + 1, now.getFullYear());
+            let diff = info.jd - todayJd;
+            window.hoverCountdown = info.festivals.length > 0 ? countdownText(diff) : "";
+            let nf = (diff === 0) ? Lunar.nextFestival(todayJd + 1, 7) : null;
+            window.hoverNext = nf ? { name: nf.name, days: nf.jd - todayJd } : null;
+
+            let pt = cellItem.mapToItem(calendarRect, 0, 0);
+            window.hoverY = pt.y + cellItem.height / 2;
+            window.hoverIndex = idx;
+        } else if (window.hoverIndex === idx) {
+            hoverHideTimer.restart();
+        }
+    }
+
+    Connections {
+        target: Config
+        function onSettingsLoaded() { window.refreshLunarSetting(); }
+    }
+
     property real calendarContentOpacity: 1.0
     property real calendarContentOffset: 0.0
     property int calendarAnimDirection: 1
@@ -395,22 +515,53 @@ Item {
         let daysInPrevMonth = new Date(targetYear, targetMonth, 0).getDate();
 
         calendarModel.clear();
+        window.hoverIndex = -1;
 
-        for (let i = firstDay - 1; i >= 0; i--) {
-            calendarModel.append({ dayNum: (daysInPrevMonth - i).toString(), isCurrentMonth: false, isToday: false });
-        }
-        for (let i = 1; i <= daysInMonth; i++) {
-            calendarModel.append({ dayNum: i.toString(), isCurrentMonth: true, isToday: (isRealCurrentMonth && i === todayDate) });
-        }
-        let remaining = 42 - calendarModel.count;
-        for (let i = 1; i <= remaining; i++) {
-            calendarModel.append({ dayNum: i.toString(), isCurrentMonth: false, isToday: false });
+        let showLunar = window.lunarEnabled;
+        let showHoliday = window.lunarShowHolidays;
+
+        for (let idx = 0; idx < 42; idx++) {
+            let cell = new Date(targetYear, targetMonth, 1 - firstDay + idx);
+            let inMonth = (cell.getMonth() === targetMonth);
+
+            let cd = cell.getDate();
+            let cm = cell.getMonth() + 1;
+            let cy = cell.getFullYear();
+
+            let lunarLabel = "";
+            let isFirst = false;
+            let isMark = false;
+            let isHoliday = false;
+            if (showLunar) {
+                let lunar = Lunar.convertSolar2Lunar(cd, cm, cy, 7);
+                isFirst = (lunar.day === 1);
+                isMark = (lunar.day === 1 || lunar.day === 15);
+                lunarLabel = isFirst
+                    ? (lunar.day + "/" + lunar.month + (lunar.leap ? "N" : ""))
+                    : lunar.day.toString();
+                if (showHoliday) {
+                    isHoliday = Lunar.findFestivals(lunar, Lunar.jdFromDate(cd, cm, cy), 7).length > 0;
+                }
+            }
+
+            calendarModel.append({
+                dayNum: cd.toString(),
+                isCurrentMonth: inMonth,
+                isToday: (inMonth && isRealCurrentMonth && cd === todayDate),
+                lunarText: lunarLabel,
+                lunarHighlight: isMark,
+                hasHoliday: isHoliday,
+                cellD: cd,
+                cellM: cm,
+                cellY: cy
+            });
         }
     }
 
     onMonthOffsetChanged: updateCalendarGrid()
 
     Component.onCompleted: {
+        refreshLunarSetting();
         updateCalendarGrid();
         if (visible) {
             forceActiveFocus();
@@ -777,6 +928,82 @@ Item {
 
                 HoverHandler { id: calHover }
 
+                Rectangle {
+                    id: dayTip
+                    z: 100
+                    width: window.s(236)
+                    height: tipColumn.implicitHeight + window.s(24)
+                    x: calendarRect.width + window.s(10)
+                    y: Math.max(0, Math.min(calendarRect.height - height, window.hoverY - height / 2))
+                    Behavior on y { NumberAnimation { duration: 90; easing.type: Easing.OutQuad } }
+                    radius: ThemeBackend.borderRadius
+                    color: Qt.alpha(window.mantle, 0.97)
+                    border.color: Qt.alpha(window.surface2, 0.7)
+                    border.width: 1
+                    opacity: (window.lunarEnabled && window.hoverIndex >= 0) ? 1.0 : 0.0
+                    visible: opacity > 0
+                    Behavior on opacity { NumberAnimation { duration: 120 } }
+
+                    ColumnLayout {
+                        id: tipColumn
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.top: parent.top
+                        anchors.margins: window.s(12)
+                        spacing: window.s(8)
+
+                        Text {
+                            Layout.fillWidth: true
+                            text: window.hoverTitle
+                            font.family: ThemeBackend.fontFamily
+                            font.weight: Font.Black
+                            font.pixelSize: window.s(13)
+                            color: window.text
+                            wrapMode: Text.WordWrap
+                        }
+
+                        Text {
+                            Layout.fillWidth: true
+                            visible: !!(window.lunarShowHolidays && window.hoverInfo && window.hoverInfo.festivals.length > 0)
+                            text: window.hoverInfo
+                                ? ("● " + window.hoverInfo.festivals.join(" · ")
+                                    + (window.hoverCountdown !== "" ? " · " + window.hoverCountdown : ""))
+                                : ""
+                            font.family: ThemeBackend.fontFamily
+                            font.weight: Font.Bold
+                            font.pixelSize: window.s(12)
+                            color: window.textAccent
+                            wrapMode: Text.WordWrap
+                        }
+
+                        Repeater {
+                            model: window.tipRows
+                            delegate: ColumnLayout {
+                                Layout.fillWidth: true
+                                spacing: window.s(1)
+
+                                Text {
+                                    text: modelData.label.toUpperCase()
+                                    font.family: ThemeBackend.fontFamily
+                                    font.weight: Font.Black
+                                    font.pixelSize: window.s(9)
+                                    color: window.overlay0
+                                }
+
+                                Text {
+                                    Layout.fillWidth: true
+                                    text: modelData.value
+                                    font.family: ThemeBackend.fontFamily
+                                    font.weight: Font.Bold
+                                    font.pixelSize: window.s(11.5)
+                                    color: window.text
+                                    wrapMode: Text.WordWrap
+                                }
+                            }
+                        }
+                    }
+                }
+
                 ColumnLayout {
                     anchors.fill: parent
                     anchors.topMargin: window.s(12)
@@ -874,16 +1101,61 @@ Item {
 
                         Repeater {
                             model: calendarModel
-                            ClickButton {
+                            Rectangle {
+                                id: dayCell
                                 Layout.fillWidth: true
                                 Layout.fillHeight: true
-                                enabled: false
-                                buttonText: dayNum
-                                textFontSize: window.s(11.5)
-                                cornerRadius: window.s(5)
-                                horizontalPadding: 0
-                                accentColor: isToday ? window.textAccent : "transparent"
-                                textColor: isToday ? window.base : (isCurrentMonth ? window.text : window.surface0)
+                                radius: window.s(5)
+                                color: isToday
+                                    ? window.textAccent
+                                    : (dayHover.hovered && window.lunarEnabled ? Qt.alpha(window.surface1, 0.5) : "transparent")
+
+                                HoverHandler {
+                                    id: dayHover
+                                    enabled: window.lunarEnabled
+                                    onHoveredChanged: window.setHoverCell(index, hovered, dayCell)
+                                }
+
+                                Rectangle {
+                                    visible: window.lunarEnabled && window.lunarShowHolidays && hasHoliday
+                                    width: window.s(4)
+                                    height: width
+                                    radius: width / 2
+                                    anchors.top: parent.top
+                                    anchors.right: parent.right
+                                    anchors.topMargin: window.s(4)
+                                    anchors.rightMargin: window.s(5)
+                                    color: isToday ? window.base : window.textAccent
+                                    opacity: isCurrentMonth ? 1.0 : 0.35
+                                }
+
+                                ColumnLayout {
+                                    anchors.centerIn: parent
+                                    spacing: 0
+
+                                    Text {
+                                        Layout.alignment: Qt.AlignHCenter
+                                        text: dayNum
+                                        font.family: ThemeBackend.fontFamily
+                                        font.weight: Font.Bold
+                                        font.pixelSize: window.s(11.5)
+                                        color: isToday ? window.base : (isCurrentMonth ? window.text : window.surface0)
+                                    }
+
+                                    Text {
+                                        Layout.alignment: Qt.AlignHCenter
+                                        visible: window.lunarEnabled
+                                        text: lunarText
+                                        font.family: ThemeBackend.fontFamily
+                                        font.weight: lunarHighlight ? Font.Bold : Font.Medium
+                                        font.pixelSize: window.s(8.5)
+                                        color: isToday
+                                            ? Qt.alpha(window.base, 0.75)
+                                            : (isCurrentMonth
+                                                ? (lunarHighlight ? window.textAccent : window.overlay0)
+                                                : window.surface0)
+                                    }
+                                }
                             }
                         }
                     }

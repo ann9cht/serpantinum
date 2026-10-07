@@ -205,6 +205,26 @@
         "title": "Thao tác nhanh",
         "desc": "Bật lớp phủ thao tác nhanh nổi"
       },
+      "lunar": {
+        "title": "Lịch âm",
+        "desc": "Hiển thị ngày âm lịch dưới mỗi ngày trong lịch"
+      },
+      "lunar_canchi": {
+        "title": "Can chi",
+        "desc": "Hiển thị can chi của ngày, tháng, năm khi rê chuột vào một ngày"
+      },
+      "lunar_hoangdao": {
+        "title": "Giờ hoàng đạo",
+        "desc": "Hiển thị các giờ hoàng đạo khi rê chuột vào một ngày"
+      },
+      "lunar_tietkhi": {
+        "title": "Tiết khí",
+        "desc": "Hiển thị tiết khí khi rê chuột vào một ngày"
+      },
+      "lunar_holidays": {
+        "title": "Ngày lễ âm lịch",
+        "desc": "Đánh dấu các ngày lễ như Tết, Trung Thu và hiện tên lễ khi rê chuột"
+      },
       "location": {
         "title": "Vị trí",
         "desc": "Cấu hình vị trí cho lịch trình mặt trời tự động và thời tiết",
@@ -785,6 +805,23 @@
       "fr": "T6",
       "sa": "T7",
       "su": "CN"
+    },
+    "lunar": {
+      "date": "Âm lịch",
+      "month": "tháng",
+      "leap": "nhuận",
+      "can_chi": "Can chi",
+      "day_cc": "Ngày",
+      "month_cc": "Tháng",
+      "year_cc": "Năm",
+      "solar_term": "Tiết khí",
+      "solar_term_starts": "bắt đầu hôm nay",
+      "gio_hoang_dao": "Giờ hoàng đạo",
+      "today": "hôm nay",
+      "tomorrow": "ngày mai",
+      "in": "còn",
+      "days": "ngày",
+      "next_festival": "Lễ sắp tới"
     }
   },
   "clipboard": {
@@ -895,7 +932,7 @@
     "timer": {
       "tabs": {
         "timer": "Hẹn giờ",
-        "stopwatch": "Đồng hồ bấm giờ",
+        "stopwatch": "Bấm giờ",
         "pomodoro": "Pomodoro"
       },
       "stopwatch": {

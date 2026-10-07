@@ -41,7 +41,12 @@ Item {
         "screenshotCaptureOnRelease": false,
         "weatherInterval": 15,
         "weatherUnit": "metric",
-        "quickactions": true
+        "quickactions": true,
+        "lunarCalendar": true,
+        "lunarCanChi": true,
+        "lunarGioHoangDao": true,
+        "lunarTietKhi": true,
+        "lunarHolidays": true
     }
 
     property var generalSettings: Config.getSetting("general", defaultGeneralSettings)
@@ -50,6 +55,11 @@ Item {
     property real sfxVolume: generalSettings.sfxVolume !== undefined ? generalSettings.sfxVolume : 100
     property bool screenshotCaptureOnRelease: generalSettings.screenshotCaptureOnRelease !== undefined ? generalSettings.screenshotCaptureOnRelease : false
     property bool quickactions: generalSettings.quickactions !== undefined ? generalSettings.quickactions : true
+    property bool lunarCalendar: generalSettings.lunarCalendar !== undefined ? generalSettings.lunarCalendar : true
+    property bool lunarCanChi: generalSettings.lunarCanChi !== undefined ? generalSettings.lunarCanChi : true
+    property bool lunarGioHoangDao: generalSettings.lunarGioHoangDao !== undefined ? generalSettings.lunarGioHoangDao : true
+    property bool lunarTietKhi: generalSettings.lunarTietKhi !== undefined ? generalSettings.lunarTietKhi : true
+    property bool lunarHolidays: generalSettings.lunarHolidays !== undefined ? generalSettings.lunarHolidays : true
     property int weatherInterval: generalSettings.weatherInterval !== undefined ? generalSettings.weatherInterval : 15
     property string weatherUnit: generalSettings.weatherUnit !== undefined ? generalSettings.weatherUnit : "metric"
     property bool isLocEditOpen: false
@@ -87,6 +97,11 @@ Item {
             generalTabRoot.sfxVolume = gs.sfxVolume !== undefined ? gs.sfxVolume : 100;
             generalTabRoot.screenshotCaptureOnRelease = gs.screenshotCaptureOnRelease !== undefined ? gs.screenshotCaptureOnRelease : false;
             generalTabRoot.quickactions = gs.quickactions !== undefined ? gs.quickactions : true;
+            generalTabRoot.lunarCalendar = gs.lunarCalendar !== undefined ? gs.lunarCalendar : true;
+            generalTabRoot.lunarCanChi = gs.lunarCanChi !== undefined ? gs.lunarCanChi : true;
+            generalTabRoot.lunarGioHoangDao = gs.lunarGioHoangDao !== undefined ? gs.lunarGioHoangDao : true;
+            generalTabRoot.lunarTietKhi = gs.lunarTietKhi !== undefined ? gs.lunarTietKhi : true;
+            generalTabRoot.lunarHolidays = gs.lunarHolidays !== undefined ? gs.lunarHolidays : true;
             generalTabRoot.weatherInterval = gs.weatherInterval !== undefined ? gs.weatherInterval : 15;
             generalTabRoot.weatherUnit = gs.weatherUnit !== undefined ? gs.weatherUnit : "metric";
             generalTabRoot.generalSettings = gs;
@@ -117,6 +132,11 @@ Item {
         current.sfxVolume = generalTabRoot.sfxVolume;
         current.screenshotCaptureOnRelease = generalTabRoot.screenshotCaptureOnRelease;
         current.quickactions = generalTabRoot.quickactions;
+        current.lunarCalendar = generalTabRoot.lunarCalendar;
+        current.lunarCanChi = generalTabRoot.lunarCanChi;
+        current.lunarGioHoangDao = generalTabRoot.lunarGioHoangDao;
+        current.lunarTietKhi = generalTabRoot.lunarTietKhi;
+        current.lunarHolidays = generalTabRoot.lunarHolidays;
         current.weatherInterval = generalTabRoot.weatherInterval;
         current.weatherUnit = generalTabRoot.weatherUnit;
         Config.setSetting("general", current);
@@ -323,6 +343,149 @@ Item {
                         generalTabRoot.updateGeneralSettings();
                     }
                 }
+            }
+
+            SettingsGroup {
+                rootObj: generalTabRoot.rootObj
+                icon: "󰃭"
+                title: I18n.t("guide.general.lunar.title") || "Vietnamese lunar calendar"
+                description: I18n.t("guide.general.lunar.desc") || "Show lunar dates under each day in the calendar"
+                visible: generalTabRoot.currentLanguage === "vi"
+                expanded: generalTabRoot.lunarCalendar
+
+                Toggle {
+                    id: lunarToggle
+                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                    checked: generalTabRoot.lunarCalendar
+                    accentColor: ThemeBackend.mauve
+                    baseColor: ThemeBackend.surface1
+                    handleColor: ThemeBackend.crust
+                    handleOffColor: ThemeBackend.text
+                    onToggled: function(c) {
+                        generalTabRoot.lunarCalendar = c;
+                        generalTabRoot.updateGeneralSettings();
+                    }
+
+                    Binding {
+                        target: lunarToggle
+                        property: "checked"
+                        value: generalTabRoot.lunarCalendar
+                    }
+                }
+
+                subSettings: [
+                    SettingsRow {
+                        rootObj: generalTabRoot.rootObj
+                        baseColor: Qt.alpha(ThemeBackend.surface1, 0.35)
+                        icon: "󰃮"
+                        title: I18n.t("guide.general.lunar_canchi.title") || "Can Chi"
+                        description: I18n.t("guide.general.lunar_canchi.desc") || "Show day, month and year Can Chi when hovering a day"
+
+                        Toggle {
+                            id: lunarCanChiToggle
+                            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                            checked: generalTabRoot.lunarCanChi
+                            accentColor: ThemeBackend.mauve
+                            baseColor: ThemeBackend.surface1
+                            handleColor: ThemeBackend.crust
+                            handleOffColor: ThemeBackend.text
+                            onToggled: function(c) {
+                                generalTabRoot.lunarCanChi = c;
+                                generalTabRoot.updateGeneralSettings();
+                            }
+
+                            Binding {
+                                target: lunarCanChiToggle
+                                property: "checked"
+                                value: generalTabRoot.lunarCanChi
+                            }
+                        }
+                    },
+
+                    SettingsRow {
+                        rootObj: generalTabRoot.rootObj
+                        baseColor: Qt.alpha(ThemeBackend.surface1, 0.35)
+                        icon: "󰥔"
+                        title: I18n.t("guide.general.lunar_hoangdao.title") || "Auspicious hours"
+                        description: I18n.t("guide.general.lunar_hoangdao.desc") || "Show auspicious hours (giờ hoàng đạo) when hovering a day"
+
+                        Toggle {
+                            id: lunarGioHoangDaoToggle
+                            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                            checked: generalTabRoot.lunarGioHoangDao
+                            accentColor: ThemeBackend.mauve
+                            baseColor: ThemeBackend.surface1
+                            handleColor: ThemeBackend.crust
+                            handleOffColor: ThemeBackend.text
+                            onToggled: function(c) {
+                                generalTabRoot.lunarGioHoangDao = c;
+                                generalTabRoot.updateGeneralSettings();
+                            }
+
+                            Binding {
+                                target: lunarGioHoangDaoToggle
+                                property: "checked"
+                                value: generalTabRoot.lunarGioHoangDao
+                            }
+                        }
+                    },
+
+                    SettingsRow {
+                        rootObj: generalTabRoot.rootObj
+                        baseColor: Qt.alpha(ThemeBackend.surface1, 0.35)
+                        icon: "󰖙"
+                        title: I18n.t("guide.general.lunar_tietkhi.title") || "Solar terms"
+                        description: I18n.t("guide.general.lunar_tietkhi.desc") || "Show the solar term (tiết khí) when hovering a day"
+
+                        Toggle {
+                            id: lunarTietKhiToggle
+                            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                            checked: generalTabRoot.lunarTietKhi
+                            accentColor: ThemeBackend.mauve
+                            baseColor: ThemeBackend.surface1
+                            handleColor: ThemeBackend.crust
+                            handleOffColor: ThemeBackend.text
+                            onToggled: function(c) {
+                                generalTabRoot.lunarTietKhi = c;
+                                generalTabRoot.updateGeneralSettings();
+                            }
+
+                            Binding {
+                                target: lunarTietKhiToggle
+                                property: "checked"
+                                value: generalTabRoot.lunarTietKhi
+                            }
+                        }
+                    },
+
+                    SettingsRow {
+                        rootObj: generalTabRoot.rootObj
+                        baseColor: Qt.alpha(ThemeBackend.surface1, 0.35)
+                        icon: "󰓎"
+                        title: I18n.t("guide.general.lunar_holidays.title") || "Lunar festivals"
+                        description: I18n.t("guide.general.lunar_holidays.desc") || "Mark festivals such as Tết and Trung Thu with a dot"
+
+                        Toggle {
+                            id: lunarHolidaysToggle
+                            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                            checked: generalTabRoot.lunarHolidays
+                            accentColor: ThemeBackend.mauve
+                            baseColor: ThemeBackend.surface1
+                            handleColor: ThemeBackend.crust
+                            handleOffColor: ThemeBackend.text
+                            onToggled: function(c) {
+                                generalTabRoot.lunarHolidays = c;
+                                generalTabRoot.updateGeneralSettings();
+                            }
+
+                            Binding {
+                                target: lunarHolidaysToggle
+                                property: "checked"
+                                value: generalTabRoot.lunarHolidays
+                            }
+                        }
+                    }
+                ]
             }
 
             SettingsRow {
