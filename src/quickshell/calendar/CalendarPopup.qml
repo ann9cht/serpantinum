@@ -11,6 +11,7 @@ import "LunarCalendar.js" as Lunar
 
 Item {
     id: window
+    visible: false
     focus: true
 
     function s(val) {
