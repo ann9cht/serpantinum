@@ -1043,6 +1043,7 @@ Item {
                     RowLayout {
                         Layout.fillWidth: true
                         Layout.bottomMargin: window.s(14)
+                        layoutDirection: I18n.layoutDirection
 
                         IconButton {
                             Layout.preferredWidth: window.s(28)
@@ -1064,7 +1065,7 @@ Item {
                             Layout.preferredHeight: window.s(28)
                             size: window.s(28)
                             cornerRadius: window.s(8)
-                            buttonIcon: ""
+                            buttonIcon: I18n.rtl ? "" : ""
                             iconFontSize: window.s(14)
                             accentColor: window.surface0
                             textColor: window.text
@@ -1091,7 +1092,7 @@ Item {
                             Layout.preferredHeight: window.s(28)
                             size: window.s(28)
                             cornerRadius: window.s(8)
-                            buttonIcon: ""
+                            buttonIcon: I18n.rtl ? "" : ""
                             iconFontSize: window.s(14)
                             accentColor: window.surface0
                             textColor: window.text
@@ -1102,6 +1103,7 @@ Item {
                     RowLayout {
                         Layout.fillWidth: true
                         Layout.bottomMargin: window.s(4)
+                        layoutDirection: I18n.layoutDirection
 
                         Repeater {
                             model: [I18n.t("calendar.days.mo"), I18n.t("calendar.days.tu"), I18n.t("calendar.days.we"), I18n.t("calendar.days.th"), I18n.t("calendar.days.fr"), I18n.t("calendar.days.sa"), I18n.t("calendar.days.su")]
@@ -1123,6 +1125,7 @@ Item {
                         columns: 7
                         rowSpacing: window.s(2)
                         columnSpacing: window.s(3)
+                        layoutDirection: I18n.layoutDirection
 
                         opacity: window.calendarContentOpacity
                         transform: Translate { x: window.calendarContentOffset }
@@ -1210,13 +1213,14 @@ Item {
                         Layout.fillWidth: true
                         Layout.alignment: Qt.AlignRight | Qt.AlignTop
                         spacing: window.s(14)
+                        layoutDirection: I18n.layoutDirection
 
                         IconButton {
                             Layout.preferredWidth: window.s(28)
                             Layout.preferredHeight: window.s(28)
                             size: window.s(28)
                             cornerRadius: window.s(8)
-                            buttonIcon: ""
+                            buttonIcon: I18n.rtl ? "" : ""
                             iconFontSize: window.s(12)
                             accentColor: window.surface0
                             textColor: isHoveredOrHighlighted ? window.textAccent : window.overlay1
@@ -1240,7 +1244,7 @@ Item {
                             Layout.preferredHeight: window.s(28)
                             size: window.s(28)
                             cornerRadius: window.s(8)
-                            buttonIcon: ""
+                            buttonIcon: I18n.rtl ? "" : ""
                             iconFontSize: window.s(12)
                             accentColor: window.surface0
                             textColor: isHoveredOrHighlighted ? window.textAccent : window.overlay1
@@ -1304,6 +1308,7 @@ Item {
                         columns: 2
                         rowSpacing: window.s(8)
                         columnSpacing: window.s(8)
+                        layoutDirection: I18n.layoutDirection
 
                         Repeater {
                             model: 4
