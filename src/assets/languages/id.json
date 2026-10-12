@@ -568,7 +568,8 @@
         "pictures": "Gambar",
         "music": "Musik",
         "documents": "Dokumen"
-      }
+      },
+      "done": "Selesai"
     },
     "font_picker": {
       "title": "Pilih huruf",
@@ -796,6 +797,29 @@
       "smart_autohide": {
         "title": "Sembunyikan otomatis cerdas",
         "desc": "Sembunyikan dok secara otomatis hanya saat jendela terbuka, tetap tampilkan di desktop"
+      },
+      "focus_running": {
+        "title": "Fokuskan jendela yang ada",
+        "desc": "Mengklik ikon aplikasi mengaktifkan jendela yang terbuka alih-alih meluncurkan instans baru"
+      },
+      "show_running_indicators": {
+        "title": "Indikator aplikasi berjalan",
+        "desc": "Tampilkan indikator titik atau pil pada ikon aplikasi yang terbuka"
+      },
+      "show_running_apps": {
+        "title": "Tampilkan aplikasi yang terbuka",
+        "desc": "Tampilkan aplikasi terbuka yang tidak disematkan di dok"
+      },
+      "running_scope": {
+        "title": "Cakupan jendela aktif",
+        "desc": "Filter jendela berjalan yang ditampilkan dan dikontrol oleh dok",
+        "auto": "Otomatis (default kompositor)",
+        "all": "Semua ruang kerja & monitor",
+        "output": "Hanya monitor saat ini",
+        "workspace": "Hanya ruang kerja aktif"
+      },
+      "window_menu": {
+        "untitled": "Untitled"
       }
     },
     "lyrics_picker": {

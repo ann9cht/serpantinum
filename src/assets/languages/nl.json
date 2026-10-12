@@ -568,7 +568,8 @@
         "pictures": "Afbeeldingen",
         "music": "Muziek",
         "documents": "Documenten"
-      }
+      },
+      "done": "Klaar"
     },
     "font_picker": {
       "title": "Selecteer een lettertype",
@@ -796,6 +797,29 @@
       "smart_autohide": {
         "title": "Slim automatisch verbergen",
         "desc": "Dock alleen automatisch verbergen wanneer er vensters geopend zijn, zichtbaar houden op het bureaublad"
+      },
+      "focus_running": {
+        "title": "Bestaand venster activeren",
+        "desc": "Klikken op een app-pictogram activeert het geopende venster in plaats van een nieuw exemplaar te starten"
+      },
+      "show_running_indicators": {
+        "title": "Uitvoeringsindicatoren",
+        "desc": "Punt- of balkindicatoren weergeven op pictogrammen van geopende applicaties"
+      },
+      "show_running_apps": {
+        "title": "Geopende applicaties weergeven",
+        "desc": "Niet-vastgemaakte geopende applicaties in het dock weergeven"
+      },
+      "running_scope": {
+        "title": "Bereik actieve vensters",
+        "desc": "Filter actieve vensters die door het dock worden weergegeven en beheerd",
+        "auto": "Automatisch (standaard compositor)",
+        "all": "Alle werkbladen en beeldschermen",
+        "output": "Alleen huidig beeldscherm",
+        "workspace": "Alleen actief werkblad"
+      },
+      "window_menu": {
+        "untitled": "Untitled"
       }
     },
     "lyrics_picker": {

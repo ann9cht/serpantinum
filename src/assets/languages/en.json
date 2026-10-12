@@ -588,7 +588,8 @@
         "pictures": "Pictures",
         "music": "Music",
         "documents": "Documents"
-      }
+      },
+      "done": "Done"
     },
     "font_picker": {
       "title": "Select a font",
@@ -816,6 +817,32 @@
       "smart_autohide": {
         "title": "Smart auto-hide",
         "desc": "Auto-hide dock only when windows are open, keep visible on desktop"
+      },
+      "focus_running": {
+        "title": "Focus existing window",
+        "desc": "Clicking an app icon activates its open window instead of launching a new instance"
+      },
+      "show_running_indicators": {
+        "title": "Running indicators",
+        "desc": "Show dot or pill indicators on open application icons"
+      },
+      "show_running_apps": {
+        "title": "Show open applications",
+        "desc": "Display unpinned open applications in the dock"
+      },
+      "running_scope": {
+        "title": "Active window scope",
+        "desc": "Filter running windows displayed and controlled by the dock",
+        "auto": "Automatic (compositor default)",
+        "all": "All workspaces & monitors",
+        "output": "Current monitor only",
+        "workspace": "Active workspace only"
+      },
+      "window_menu": {
+        "new_window": "New window",
+        "pin": "Pin to dock",
+        "unpin": "Unpin from dock",
+        "untitled": "Untitled"
       }
     },
     "lyrics_picker": {

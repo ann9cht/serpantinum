@@ -142,78 +142,16 @@ Item {
                         anchors.verticalCenter: parent.verticalCenter
                         width: root.colWidth
 
-                        Item {
-                            id: titleClipRect
+                        MarqueeText {
                             width: parent.width
-                            height: titleTextMain.implicitHeight
-                            clip: true
-
-                            property int marqueeSpacing: barWindow ? barWindow.s(40) : 40
-                            property real scrollProgress: 0.0
-                            readonly property real scrollDistance: titleTextMain.implicitWidth + marqueeSpacing
-                            readonly property bool canMarquee: root.visible && (!barWindow || barWindow.visible) && (!module || module.moduleActive) && root.isPlaying && (titleTextMain.implicitWidth > width)
-
-                            function resetMarquee() {
-                                scrollProgress = 0.0;
-                                if (canMarquee) {
-                                    titleAnim.restart();
-                                } else {
-                                    titleAnim.stop();
-                                }
-                            }
-
-                            onCanMarqueeChanged: resetMarquee()
-                            onWidthChanged: resetMarquee()
-
-                            Item {
-                                id: marqueeContainer
-                                height: parent.height
-                                x: titleClipRect.canMarquee ? -Math.round(titleClipRect.scrollProgress * titleClipRect.scrollDistance) : 0
-
-                                Row {
-                                    spacing: titleClipRect.marqueeSpacing
-
-                                    Text {
-                                        id: titleTextMain
-                                        text: isMediaActive ? (player ? player.trackTitle : "") : I18n.t("music.nothing_playing")
-                                        font.family: ThemeBackend.fontFamily
-                                        font.weight: Font.Black
-                                        font.pixelSize: barWindow ? barWindow.s(root.isCompact ? 11 : 12) : (root.isCompact ? 11 : 12)
-                                        color: ThemeBackend.text
-
-                                        onTextChanged: titleClipRect.resetMarquee()
-                                    }
-
-                                    Text {
-                                        id: titleTextClone
-                                        text: titleTextMain.text
-                                        font.family: ThemeBackend.fontFamily
-                                        font.weight: Font.Black
-                                        font.pixelSize: barWindow ? barWindow.s(root.isCompact ? 11 : 12) : (root.isCompact ? 11 : 12)
-                                        color: ThemeBackend.text
-                                        visible: titleClipRect.canMarquee
-                                    }
-                                }
-                            }
-
-                            SequentialAnimation {
-                                id: titleAnim
-                                loops: Animation.Infinite
-                                running: titleClipRect.canMarquee
-
-                                PauseAnimation { duration: 3000 }
-
-                                NumberAnimation {
-                                    target: titleClipRect
-                                    property: "scrollProgress"
-                                    from: 0.0
-                                    to: 1.0
-                                    duration: Math.max(1000, titleClipRect.scrollDistance * 30)
-                                    easing.type: Easing.Linear
-                                }
-
-                                PropertyAction { target: titleClipRect; property: "scrollProgress"; value: 0.0 }
-                            }
+                            text: isMediaActive ? (player ? player.trackTitle : "") : I18n.t("music.nothing_playing")
+                            color: ThemeBackend.text
+                            font.family: ThemeBackend.fontFamily
+                            font.weight: Font.Black
+                            font.pixelSize: barWindow ? barWindow.s(root.isCompact ? 11 : 12) : (root.isCompact ? 11 : 12)
+                            marqueeSpacing: barWindow ? barWindow.s(40) : 40
+                            speed: 30
+                            active: root.visible && (!barWindow || barWindow.visible) && (!module || module.moduleActive) && root.isPlaying
                         }
 
                         Text {

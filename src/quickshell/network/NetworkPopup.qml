@@ -2425,66 +2425,19 @@ Item {
                                         Behavior on color { enabled: window.visible; ColorAnimation { duration: 200 } }
                                     }
 
-                                    Item {
+                                    MarqueeText {
                                         id: marqueeClip
                                         width: floatCardDelegateContainer.width - window.s(20) - (overlayIcon.visible ? overlayIcon.implicitWidth + window.s(6) : 0)
                                         height: parent.height
-                                        clip: true
+                                        text: myButtonText
+                                        font.family: ThemeBackend.fontFamily
+                                        font.weight: Font.Bold
+                                        font.pixelSize: window.s(12)
+                                        color: dynamicTextColor
+                                        marqueeSpacing: window.s(30)
+                                        active: window.visible
 
-                                        Item {
-                                            id: marqueeContainer
-                                            height: parent.height
-                                            width: marqueeRow.implicitWidth
-
-                                            Row {
-                                                id: marqueeRow
-                                                anchors.verticalCenter: parent.verticalCenter
-                                                spacing: window.s(30)
-
-                                                Text {
-                                                    id: overlayTextMain
-                                                    text: myButtonText
-                                                    font.family: ThemeBackend.fontFamily
-                                                    font.weight: Font.Bold
-                                                    font.pixelSize: window.s(12)
-                                                    color: dynamicTextColor
-                                                    Behavior on color { enabled: window.visible; ColorAnimation { duration: 200 } }
-
-                                                    onTextChanged: {
-                                                        marqueeContainer.x = 0;
-                                                        if (implicitWidth > marqueeClip.width && window.visible) {
-                                                            marqueeAnim.restart();
-                                                        } else {
-                                                            marqueeAnim.stop();
-                                                        }
-                                                    }
-                                                }
-
-                                                Text {
-                                                    id: overlayTextClone
-                                                    text: myButtonText
-                                                    font.family: ThemeBackend.fontFamily
-                                                    font.weight: Font.Bold
-                                                    font.pixelSize: window.s(12)
-                                                    color: overlayTextMain.color
-                                                    visible: overlayTextMain.implicitWidth > marqueeClip.width
-                                                }
-                                            }
-
-                                            SequentialAnimation on x {
-                                                id: marqueeAnim
-                                                loops: Animation.Infinite
-                                                running: window.visible && overlayTextMain.implicitWidth > marqueeClip.width
-
-                                                PauseAnimation { duration: 3000 }
-                                                NumberAnimation {
-                                                    from: 0
-                                                    to: -(overlayTextMain.implicitWidth + window.s(30))
-                                                    duration: (overlayTextMain.implicitWidth + window.s(30)) * 25
-                                                }
-                                                PropertyAction { target: marqueeContainer; property: "x"; value: 0 }
-                                            }
-                                        }
+                                        Behavior on color { enabled: window.visible; ColorAnimation { duration: 200 } }
                                     }
                                 }
                             }
@@ -2530,12 +2483,12 @@ Item {
 
                                                 Item {
                                                     height: parent.height
-                                                    width: marqueeContainer.width
-                                                    x: marqueeContainer.x
+                                                    width: marqueeClip.textWidth + marqueeClip.marqueeSpacing
+                                                    x: marqueeClip.scrollX
 
                                                     Row {
                                                         anchors.verticalCenter: parent.verticalCenter
-                                                        spacing: window.s(30)
+                                                        spacing: marqueeClip.marqueeSpacing
 
                                                         Text {
                                                             text: myButtonText
@@ -2551,7 +2504,7 @@ Item {
                                                             font.weight: Font.Bold
                                                             font.pixelSize: window.s(12)
                                                             color: ThemeBackend.crust
-                                                            visible: overlayTextMain.implicitWidth > marqueeClip.width
+                                                            visible: marqueeClip.canMarquee
                                                         }
                                                     }
                                                 }

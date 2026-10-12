@@ -568,7 +568,8 @@
         "pictures": "图片",
         "music": "音乐",
         "documents": "文档"
-      }
+      },
+      "done": "完成"
     },
     "font_picker": {
       "title": "选择字体",
@@ -796,6 +797,29 @@
       "smart_autohide": {
         "title": "智能自动隐藏",
         "desc": "仅在有窗口打开时自动隐藏，桌面为空时保持可见"
+      },
+      "focus_running": {
+        "title": "聚焦现有窗口",
+        "desc": "点击应用图标将激活其已打开的窗口，而不是启动新实例"
+      },
+      "show_running_indicators": {
+        "title": "运行指示器",
+        "desc": "在已打开的应用图标上显示圆点或条形指示器"
+      },
+      "show_running_apps": {
+        "title": "显示已打开的应用",
+        "desc": "在程序坞中显示未固定的已打开应用"
+      },
+      "running_scope": {
+        "title": "活动窗口范围",
+        "desc": "过滤程序坞显示和控制的运行窗口",
+        "auto": "自动（合成器默认）",
+        "all": "所有工作区和显示器",
+        "output": "仅当前显示器",
+        "workspace": "仅当前工作区"
+      },
+      "window_menu": {
+        "untitled": "Untitled"
       }
     },
     "lyrics_picker": {

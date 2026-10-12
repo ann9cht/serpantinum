@@ -568,7 +568,8 @@
         "pictures": "Resimler",
         "music": "Müzik",
         "documents": "Belgeler"
-      }
+      },
+      "done": "Tamam"
     },
     "font_picker": {
       "title": "Bir yazı tipi seçin",
@@ -796,6 +797,29 @@
       "smart_autohide": {
         "title": "Akıllı otomatik gizleme",
         "desc": "Dock'ı yalnızca pencereler açıkken otomatik gizleyin, masaüstünde görünür tutun"
+      },
+      "focus_running": {
+        "title": "Mevcut pencereye odaklan",
+        "desc": "Bir uygulama simgesine tıklamak, yeni bir örnek başlatmak yerine açık penceresini etkinleştirir"
+      },
+      "show_running_indicators": {
+        "title": "Çalışma göstergeleri",
+        "desc": "Açık uygulama simgelerinde nokta veya çizgi göstergeleri göster"
+      },
+      "show_running_apps": {
+        "title": "Açık uygulamaları göster",
+        "desc": "Sabitlenmemiş açık uygulamaları dock'ta görüntüle"
+      },
+      "running_scope": {
+        "title": "Etkin pencere kapsamı",
+        "desc": "Dock tarafından görüntülenen ve kontrol edilen çalışan pencereleri filtrele",
+        "auto": "Otomatik (birleştirici varsayılanı)",
+        "all": "Tüm çalışma alanları ve monitörler",
+        "output": "Yalnızca geçerli monitör",
+        "workspace": "Yalnızca etkin çalışma alanı"
+      },
+      "window_menu": {
+        "untitled": "Untitled"
       }
     },
     "lyrics_picker": {

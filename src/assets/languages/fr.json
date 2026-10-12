@@ -568,7 +568,8 @@
         "pictures": "Images",
         "music": "Musique",
         "documents": "Documents"
-      }
+      },
+      "done": "Terminé"
     },
     "font_picker": {
       "title": "Sélectionner une police",
@@ -796,6 +797,29 @@
       "smart_autohide": {
         "title": "Masquage automatique intelligent",
         "desc": "Masquer automatiquement le dock uniquement lorsque des fenêtres sont ouvertes, le garder visible sur le bureau"
+      },
+      "focus_running": {
+        "title": "Activer la fenêtre existante",
+        "desc": "Cliquer sur l'icône d'une application active sa fenêtre ouverte au lieu de lancer une nouvelle instance"
+      },
+      "show_running_indicators": {
+        "title": "Indicateurs d'exécution",
+        "desc": "Afficher des indicateurs de point ou de barre sur les icônes d'applications ouvertes"
+      },
+      "show_running_apps": {
+        "title": "Afficher les applications ouvertes",
+        "desc": "Afficher les applications ouvertes non épinglées dans le dock"
+      },
+      "running_scope": {
+        "title": "Portée des fenêtres actives",
+        "desc": "Filtrer les fenêtres en cours d'exécution affichées et contrôlées par le dock",
+        "auto": "Automatique (par défaut du compositeur)",
+        "all": "Tous les espaces de travail et écrans",
+        "output": "Écran actuel uniquement",
+        "workspace": "Espace de travail actif uniquement"
+      },
+      "window_menu": {
+        "untitled": "Untitled"
       }
     },
     "lyrics_picker": {

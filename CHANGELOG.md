@@ -1,3 +1,25 @@
+### 2.2.8
+
+- fix: disable cursor warping in hyprland settings and simplify window focus dispatch
+- fix: preserve cursor position when focusing window on hyprland
+- fix: support hyprland lua dispatcher syntax for dock and app menu window focus
+- style: accelerate desktop menu and dock app menu animations
+- style: animate desktop menu from click point with snappy spring transition
+- style: speed up dock app menu opening and closing animations
+- feat: add hover scale effects to unpinned dock items and refine menu transitions
+- Merge branch 'feat/dock-running-apps'
+- refactor: redesign dock app menu with reusable buttons and edge-safe placement
+- fix: resolve dock runningInfo binding loop and support immediate app switching in menu
+- fix: resolve dock window focus TypeError, binding loop and click interception
+- fix: dock app menu animations, app switching, and niri window focus
+- fix: resolve dock autohide with popouts, spacing calculations, and edge overlap
+- feat: implement running applications tracking and window switching in dock
+- feat(i18n): add Bulgarian translation
+- fix(quickactions): invert tab and arrow navigation on top edge in floating panel
+- fix(filepicker): replace the filepicker's checkmark button with a Done clickbutton
+- perf(sysdata): decrease live network sampling frequency to 3s
+- feat(sysdata): show live network speed instead of manual scan (#422)
+
 ### 2.2.7
 
 - feat(i18n): register new languages in guide and detect Traditional Chinese locales

@@ -13,6 +13,7 @@ LoaderIcon 1.0 display/LoaderIcon.qml
 NotificationBox 1.0 display/NotificationBox.qml
 SystemUsageCard 1.0 display/SystemUsageCard.qml
 FluidWave 1.0 display/FluidWave.qml
+MarqueeText 1.0 display/MarqueeText.qml
 
 LyricsView 1.0 media/LyricsView.qml
 WavySeekBar 1.0 media/WavySeekBar.qml
