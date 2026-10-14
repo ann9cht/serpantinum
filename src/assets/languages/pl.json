@@ -131,7 +131,8 @@
     },
     "actions": {
       "unpair": "Rozparuj",
-      "scan": "Skanuj"
+      "scan": "Skanuj",
+      "sign_in": "Zaloguj się"
     }
   },
   "notifications": {
@@ -1204,6 +1205,23 @@
           },
           "button": "Interaktywny przycisk-pigułka z tłem",
           "text": "Czysty tekst i ikona bez tła"
+        }
+      },
+      "media": {
+        "show_duration": {
+          "title": "Pokaż czas trwania",
+          "desc": "Wyświetlaj czas, który upłynął, i całkowity czas bieżącego utworu"
+        },
+        "show_icon": {
+          "title": "Pokaż ikonę",
+          "desc": "Wyświetlaj okładkę albumu lub ikonę muzyki"
+        },
+        "show_controls": {
+          "title": "Pokaż kontrolki",
+          "desc": "Wyświetlaj przyciski poprzedni, odtwarzaj i następny"
+        },
+        "preview": {
+          "title": "Tytuł utworu"
         }
       }
     },

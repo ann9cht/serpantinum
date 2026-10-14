@@ -1,3 +1,82 @@
+### 2.2.9
+
+- fix(install): install adwaita cursor theme for the fedora sddm greeter
+- docs: add Fedora to the site and split installation and NixOS pages
+- chore: ignore python cache directories
+- perf(theme): build theme tiles progressively on first open
+- perf(theme): scan fonts with a single fc-scan call
+- perf: drop redundant clock and notification timers
+- perf(bar): render pacman face with a shader instead of canvas
+- perf(calendar): draw orbit ellipse with a shader instead of canvas
+- fix(website): overlay focused navbar search on mobile
+- feat(install): port fedora fixes to the dnf backend
+- fix(website): collapse navbar search into icon button on mobile
+- feat(install): add fedora dnf backend
+- chore: update .gitignore
+- chore: flake update
+- refactor(install): abstract package management behind pm backend
+- fix(bar): resolve media face implicit height binding loop and undefined marquee state
+- docs(configure): document missing theme, display, dock, bar and idle options
+- refactor(bar): remove legacy side bar setting fallbacks
+- feat(nix): add missing bar, dock, location and inputs settings options
+- fix(bar): show the default media icon instead of live album art in the preview
+- fix(bar): give media faces an explicit size in the guide preview
+- feat(bar): add media module settings for duration, icon and controls
+- fix(guide): use sentence case for bar module labels
+- style(site): solid navbar, softer search highlights in dark mode and no gap after search
+- style(site): reorder navbar, tighten search spacing, soften support button and move shortcut hint into placeholder
+- style(site): material-style previous and next buttons in docs
+- feat(site): move search to the right and add Ko-fi support button
+- style(site): move search left, docs and changelog right and polish the footer
+- refactor(site): drop feature cards and swap hero docs button for a surface-colored GitHub link
+- revert(site): restore the star history bar chart
+- feat(site): add local search to the navbar
+- refactor(site): move navbar link color into theme variables
+- feat(site): replace template features with real feature cards and add documentation button to hero
+- fix(site): add real social preview card
+- style(site): style docs sidebar, toc, code blocks, tables and pagination and add edit links
+- fix(site): larger mobile navbar targets, changelog in drawer and compact footer grid
+- perf(site): lighter mobile background, tighter mobile hero and reduced-motion support
+- feat(site): touch-friendly area chart for star history with cached GitHub stats
+- fix(site): tap-to-expand Arch distro list on touch devices
+- fix(site): larger mobile carousel with overlay arrows, bigger dots, pause on interaction and scoped keys
+- chore(site): remove leftover markdown-page template
+- fix(site): set homepage title and description and add favicon set for search
+- chore(site): add robots.txt with sitemap reference
+- feat(network): add captive portal sign-in action to wifi info view
+- feat(site): add cloudflare web analytics
+- fix(shaders): avoid array constructors in the wipe and logo wave shaders (GLES) (#432)
+- perf(site): lazy load previews and keep carousel arrows always visible
+- perf(site): convert preview images to webp
+- fix(site): show logo only on mobile and hide changelog link outside desktop
+- feat(site): add documentation navbar link and hide changelog on mobile
+- fix(site): remove getting started link from navbar
+- fix(site): adapt navbar and pages for mobile with icon-only GitHub link
+- feat(site): add docs website with Pages deploy and short install URL
+- feat(cli): fall back to scripts/system for command lookup
+- feat(install): install Adwaita icons and configure Qt icon theme
+- fix(tray): resolve menu icons and hide unresolved ones
+- fix(shaders): exact wave stroke distance and narrower usage thickness range
+- fix(shaders): clamp wave amplitude, cycles and stroke on small circular gauges
+- fix(widgets): match usage face icons to registry
+- feat(widgets): add circle variant with style and thickness settings to usage faces
+- feat(reusables): add SystemUsageCircle gauge
+- feat(shaders): add smooth circular wave gauge shader with solid track
+- feat(widgets): replace variant switch with dropdown in redactor
+- feat(bar): link iconbutton opacity to bar opacity and remove unused BarSideModulesTab
+- refactor: split GuidePopup into sidebar, search results and content components
+- refactor: split SystemPanel into sliders, quick actions and power actions components
+- refactor: split NetworkPopup into core, card and controls components
+- fix(osd): remove iconoffsetx from all iconbuttons
+- fix(dock): fix nonexisting window change signals
+- feat: add localization for dock running applications settings
+- feat: implement multi-GPU detection and reusable MarqueeText component
+- fix: add physical battery presence check in sysnotif
+- fix(kitty): add remember_window_size no to deal with maximized kitty issue after kitty 0.49.0 update
+- fix: resolve isAdded binding loop in dock application picker
+- Fixed mismatched keys in theme creator (#427)
+- fix: move pinned open applications from running section to pinned dock items
+
 ### 2.2.8
 
 - fix: disable cursor warping in hyprland settings and simplify window focus dispatch

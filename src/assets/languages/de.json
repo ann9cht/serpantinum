@@ -530,6 +530,23 @@
           "button": "Interaktive Pillen-Schaltfläche mit Hintergrund",
           "text": "Kompakter Text und Symbol ohne Hintergrund"
         }
+      },
+      "media": {
+        "show_duration": {
+          "title": "Dauer anzeigen",
+          "desc": "Zeigt die verstrichene und die Gesamtdauer des aktuellen Titels an"
+        },
+        "show_icon": {
+          "title": "Symbol anzeigen",
+          "desc": "Zeigt das Albumcover oder das Musiksymbol an"
+        },
+        "show_controls": {
+          "title": "Steuerelemente anzeigen",
+          "desc": "Zeigt die Schaltflächen für Zurück, Wiedergabe und Weiter an"
+        },
+        "preview": {
+          "title": "Songtitel"
+        }
       }
     },
     "theme": {
@@ -1006,7 +1023,8 @@
     },
     "actions": {
       "unpair": "Entkoppeln",
-      "scan": "Suchen"
+      "scan": "Suchen",
+      "sign_in": "Anmelden"
     }
   },
   "notifications": {

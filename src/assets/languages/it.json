@@ -528,6 +528,23 @@
           "button": "Pulsante interattivo con sfondo",
           "text": "Testo e icona puliti senza sfondo"
         }
+      },
+      "media": {
+        "show_duration": {
+          "title": "Mostra durata",
+          "desc": "Mostra il tempo trascorso e la durata totale del brano corrente"
+        },
+        "show_icon": {
+          "title": "Mostra icona",
+          "desc": "Mostra la copertina dell'album o l'icona musicale"
+        },
+        "show_controls": {
+          "title": "Mostra controlli",
+          "desc": "Mostra i pulsanti precedente, riproduci e successivo"
+        },
+        "preview": {
+          "title": "Titolo del brano"
+        }
       }
     },
     "theme": {
@@ -961,7 +978,8 @@
     },
     "actions": {
       "unpair": "Scollega",
-      "scan": "Scansiona"
+      "scan": "Scansiona",
+      "sign_in": "Accedi"
     }
   },
   "notifications": {

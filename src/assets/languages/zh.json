@@ -529,6 +529,23 @@
           "button": "带背景的交互式按钮胶囊",
           "text": "无背景的简洁文本和图标"
         }
+      },
+      "media": {
+        "show_duration": {
+          "title": "显示时长",
+          "desc": "显示当前歌曲的已播放时间和总时长"
+        },
+        "show_icon": {
+          "title": "显示图标",
+          "desc": "显示专辑封面或音乐图标"
+        },
+        "show_controls": {
+          "title": "显示控制按钮",
+          "desc": "显示上一首、播放和下一首按钮"
+        },
+        "preview": {
+          "title": "歌曲标题"
+        }
       }
     },
     "theme": {
@@ -962,7 +979,8 @@
     },
     "actions": {
       "unpair": "取消配对",
-      "scan": "扫描"
+      "scan": "扫描",
+      "sign_in": "登录"
     }
   },
   "notifications": {

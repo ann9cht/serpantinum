@@ -300,7 +300,7 @@
         "focus": "Focus",
         "sysmon": "Systeemmonitor",
         "timedate": {
-          "name": "Tijd & Datum",
+          "name": "Tijd & datum",
           "style": {
             "name": {
               "classic": "Klassiek",
@@ -528,6 +528,23 @@
           },
           "button": "Interactieve capsuleknop met achtergrond",
           "text": "Strakke tekst en pictogram zonder achtergrond"
+        }
+      },
+      "media": {
+        "show_duration": {
+          "title": "Duur tonen",
+          "desc": "Toont de verstreken en totale tijd van het huidige nummer"
+        },
+        "show_icon": {
+          "title": "Pictogram tonen",
+          "desc": "Toont de albumhoes of het muziekpictogram"
+        },
+        "show_controls": {
+          "title": "Bediening tonen",
+          "desc": "Toont de knoppen voor vorige, afspelen en volgende"
+        },
+        "preview": {
+          "title": "Titel van het nummer"
         }
       }
     },
@@ -962,7 +979,8 @@
     },
     "actions": {
       "unpair": "Ontkoppelen",
-      "scan": "Scannen"
+      "scan": "Scannen",
+      "sign_in": "Inloggen"
     }
   },
   "notifications": {

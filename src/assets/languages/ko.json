@@ -529,6 +529,23 @@
           "button": "배경이 있는 인터랙티브 버튼 캡슐",
           "text": "배경 없는 깔끔한 텍스트 및 아이콘"
         }
+      },
+      "media": {
+        "show_duration": {
+          "title": "재생 시간 표시",
+          "desc": "현재 곡의 경과 시간과 전체 길이를 표시합니다"
+        },
+        "show_icon": {
+          "title": "아이콘 표시",
+          "desc": "앨범 아트 또는 음악 아이콘을 표시합니다"
+        },
+        "show_controls": {
+          "title": "컨트롤 표시",
+          "desc": "이전, 재생, 다음 버튼을 표시합니다"
+        },
+        "preview": {
+          "title": "곡 제목"
+        }
       }
     },
     "theme": {
@@ -962,7 +979,8 @@
     },
     "actions": {
       "unpair": "페어링 해제",
-      "scan": "검색"
+      "scan": "검색",
+      "sign_in": "로그인"
     }
   },
   "notifications": {

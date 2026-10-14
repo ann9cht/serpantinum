@@ -529,6 +529,23 @@
           "button": "Pilule bouton interactive avec arrière-plan",
           "text": "Texte épuré et icône sans arrière-plan"
         }
+      },
+      "media": {
+        "show_duration": {
+          "title": "Afficher la durée",
+          "desc": "Afficher le temps écoulé et la durée totale du morceau en cours"
+        },
+        "show_icon": {
+          "title": "Afficher l'icône",
+          "desc": "Afficher la pochette de l'album ou l'icône musicale"
+        },
+        "show_controls": {
+          "title": "Afficher les commandes",
+          "desc": "Afficher les boutons précédent, lecture et suivant"
+        },
+        "preview": {
+          "title": "Titre du morceau"
+        }
       }
     },
     "theme": {
@@ -962,7 +979,8 @@
     },
     "actions": {
       "unpair": "Dissocier",
-      "scan": "Analyser"
+      "scan": "Analyser",
+      "sign_in": "Se connecter"
     }
   },
   "notifications": {

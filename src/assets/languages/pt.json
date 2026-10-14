@@ -529,6 +529,23 @@
           "button": "Botão interativo com fundo",
           "text": "Texto e ícone limpos sem fundo"
         }
+      },
+      "media": {
+        "show_duration": {
+          "title": "Mostrar duração",
+          "desc": "Exibe o tempo decorrido e a duração total da música atual"
+        },
+        "show_icon": {
+          "title": "Mostrar ícone",
+          "desc": "Exibe a capa do álbum ou o ícone de música"
+        },
+        "show_controls": {
+          "title": "Mostrar controles",
+          "desc": "Exibe os botões de anterior, reproduzir e próxima"
+        },
+        "preview": {
+          "title": "Título da música"
+        }
       }
     },
     "theme": {
@@ -962,7 +979,8 @@
     },
     "actions": {
       "unpair": "Desemparelhar",
-      "scan": "Escanear"
+      "scan": "Escanear",
+      "sign_in": "Iniciar sessão"
     }
   },
   "notifications": {

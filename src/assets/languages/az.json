@@ -527,6 +527,23 @@
           "button": "Arxa planlı interaktiv düymə",
           "text": "Arxa plansız sadə mətn və ikon"
         }
+      },
+      "media": {
+        "show_duration": {
+          "title": "Müddəti göstər",
+          "desc": "Cari mahnının keçən və ümumi vaxtını göstər"
+        },
+        "show_icon": {
+          "title": "İkonu göstər",
+          "desc": "Albom üz qabığını və ya musiqi ikonunu göstər"
+        },
+        "show_controls": {
+          "title": "İdarəetməni göstər",
+          "desc": "Əvvəlki, oxut və növbəti düymələrini göstər"
+        },
+        "preview": {
+          "title": "Mahnının adı"
+        }
       }
     },
     "theme": {
@@ -956,7 +973,8 @@
     },
     "actions": {
       "unpair": "Cütləşdirməni ləğv et",
-      "scan": "Axtar"
+      "scan": "Axtar",
+      "sign_in": "Daxil ol"
     }
   },
   "notifications": {
