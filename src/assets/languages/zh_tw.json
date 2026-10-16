@@ -101,6 +101,10 @@
         "title": "空白中心動畫",
         "desc": "當通知中心為空時顯示沉睡貓咪圖案"
       },
+      "right_click_close": {
+        "title": "按右鍵關閉",
+        "desc": "按滑鼠右鍵即可關閉通知"
+      },
       "test": "測試通知",
       "test_desc": "這是一則測試通知"
     },
@@ -165,7 +169,11 @@
       "hooks": {
         "title": "勾點 (Shell 指令)"
       },
-      "custom_action_desc": "自訂逾時動作與指令"
+      "custom_action_desc": "自訂逾時動作與指令",
+      "lock_on_sleep": {
+        "title": "睡眠前鎖定",
+        "desc": "在系統暫停前鎖定工作階段，例如闔上螢幕時"
+      }
     },
     "welcome": {
       "by_author": "由 @{author} 製作",
@@ -323,6 +331,11 @@
       "width": {
         "title": "狀態列寬度",
         "desc": "以百分比設定狀態列寬度"
+      },
+      "center_by_edges": {
+        "title": "依邊緣置中",
+        "desc": "保持列左右兩側邊距相等,而不是以中間模組為中心",
+        "desc_vertical": "保持列上下兩側邊距相等,而不是以中間模組為中心"
       },
       "workspaces": {
         "title": "選擇要顯示的工作區數量",
@@ -531,9 +544,15 @@
         }
       },
       "media": {
-        "show_duration": {
-          "title": "顯示時長",
-          "desc": "顯示目前歌曲的已播放時間與總時長"
+        "info_mode": {
+          "title": "Secondary info",
+          "desc": "Choose whether to show the song duration or its author",
+          "duration": "Duration",
+          "author": "Author"
+        },
+        "width": {
+          "title": "Width",
+          "desc": "Width of the song title area"
         },
         "show_icon": {
           "title": "顯示圖示",
@@ -544,7 +563,8 @@
           "desc": "顯示上一首、播放與下一首按鈕"
         },
         "preview": {
-          "title": "歌曲標題"
+          "title": "歌曲標題",
+          "author": "Song author"
         }
       }
     },
@@ -920,6 +940,11 @@
       "access_denied": "存取遭拒",
       "authenticating": "正在驗證...",
       "enter_pin": "輸入 PIN 碼"
+    },
+    "fingerprint": {
+      "ready": "請觸碰感應器",
+      "not_recognized": "未辨識到指紋",
+      "recognized": "指紋已辨識"
     },
     "power": {
       "suspend": "睡眠",
@@ -1501,7 +1526,11 @@
     "deploy": {
       "configuring_sddm": "正在設定 SDDM 顯示管理器...",
       "disabling_dm": "-> 正在停用衝突的顯示管理器：{dm}",
-      "sddm_success": "-> 已安裝 SDDM Material You 主題並啟用服務 [ 確定 ]"
+      "sddm_success": "-> 已安裝 SDDM Material You 主題並啟用服務 [ 確定 ]",
+      "sddm_no_wayland_compositor": "找不到登入畫面支援的 Wayland 合成器（kwin_wayland/weston），SDDM 將使用 X11。",
+      "sddm_no_xorg": "找不到 Xorg，SDDM 將使用 {compositor}。",
+      "sddm_no_backend": "在 /usr/local/bin、/usr/bin 或 /bin 中既找不到 Xorg，也找不到登入畫面支援的 Wayland 合成器（kwin_wayland/weston）。",
+      "sddm_skipped": "已略過 SDDM 設定：找不到可用的顯示伺服器或登入合成器。目前的顯示管理器保持不變。"
     }
   },
   "translator": {

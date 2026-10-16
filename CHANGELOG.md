@@ -1,3 +1,46 @@
+### 2.2.10
+
+- docs: mention fedora and mango support in readme
+- feat: add mango compositor support
+- feat(website): add mango to supported compositors
+- feat(mango): hide ui scale setting in display tab
+- feat(focus): support sway in focus daemon
+- feat(installer): add terra repository for mangowm on fedora
+- fix(mango): adapt config and docs to mango 0.18 option names
+- docs: add mango compositor guide
+- feat(installer): add mango compositor option
+- feat(mango): support display settings and idle dpms
+- feat(mango): support focus tracking and monitor scripts
+- feat(mango): support keyboard layout in bar and lock
+- feat(mango): track tags and windows through mmsg
+- feat(mango): add mango compositor config
+- feat(website): add custom 404 page
+- fix(lock): compare FullyCharged against battery state
+- feat(lock): add dedicated serpantinum pam service
+- fix(lock): fall back to fprintd-verify when pam stack lacks fprintd
+- refactor(lock): use native pam for fingerprint and password
+- feat(bar): add media width slider and duration/author switch
+- feat(lock): add native fingerprint unlock with animated indicator
+- fix(bar): resolve implicitWidth binding loop in side media face
+- fix(bar): align icons and tighten gaps in text-only faces
+- Merge PR #438: add maximize toggle on Mod+Alt+F for hyprland and niri
+- Merge PR #355: use I18n for the lock screen feels-like label
+- Merge PR #356: use I18n for the full weather widget feels-like label
+- perf(theme): spread color updates across frames to avoid wallpaper transition stutter
+- feat(screenshot): show live pipewire levels on read-only sliders for gpu-screen-recorder
+- fix(screenshot): treat zero volume as muted for wf-recorder audio
+- feat(keybinds): add maximize toggle on Mod+Alt+F (hyprland, niri)
+- Merge PR #436: treat a comma as the decimal separator in the launcher calculator
+- style(launcher): drop comments from decimal comma normalizer
+- fix(launcher): treat a comma as the decimal separator in the calculator
+- fix(docs): use bracket title syntax for the Home Manager note admonition
+- docs: rename NixOS pages to Flake input and Home Manager and note shared options
+- chore: update 2.2.9 changelog
+- docs: add Fedora to the site and split installation and NixOS pages
+- fix(install): install adwaita cursor theme for the fedora sddm greeter
+- revert: set SDDM cursor theme on every distribution
+- fix: set SDDM cursor theme on every distribution
+
 ### 2.2.9
 
 - fix(install): install adwaita cursor theme for the fedora sddm greeter

@@ -46,6 +46,8 @@ Item {
 
     property bool _readInProgress: false
     property var matugenColors: null
+    property var _colorQueue: []
+    property int colorsPerFrame: 3
 
     property var availableFontPaths: ({})
     property var bundledNames: []
@@ -271,37 +273,45 @@ Item {
             return val.toString();
         };
 
-        let safeAssign = function(propName, colorVal) {
-            let hexColor = resolveHex(colorVal);
-            if (!hexColor) return;
-            let nextColor = Qt.color(hexColor);
-            if (root[propName].toString() !== nextColor.toString()) {
-                root[propName] = nextColor;
-            }
-        };
+        let names = ["base", "mantle", "crust", "surface0", "surface1", "surface2",
+                     "overlay0", "overlay1", "overlay2", "text", "subtext0", "subtext1",
+                     "blue", "sapphire", "peach", "green", "red", "mauve", "pink",
+                     "yellow", "maroon", "teal"];
 
-        safeAssign("base",      c.base);
-        safeAssign("mantle",    c.mantle);
-        safeAssign("crust",     c.crust);
-        safeAssign("surface0",  c.surface0);
-        safeAssign("surface1",  c.surface1);
-        safeAssign("surface2",  c.surface2);
-        safeAssign("overlay0",  c.overlay0);
-        safeAssign("overlay1",  c.overlay1);
-        safeAssign("overlay2",  c.overlay2);
-        safeAssign("text",      c.text);
-        safeAssign("subtext0",  c.subtext0);
-        safeAssign("subtext1",  c.subtext1);
-        safeAssign("blue",      c.blue);
-        safeAssign("sapphire",  c.sapphire);
-        safeAssign("peach",     c.peach);
-        safeAssign("green",     c.green);
-        safeAssign("red",       c.red);
-        safeAssign("mauve",     c.mauve);
-        safeAssign("pink",      c.pink);
-        safeAssign("yellow",    c.yellow);
-        safeAssign("maroon",    c.maroon);
-        safeAssign("teal",      c.teal);
+        let queue = [];
+        for (let i = 0; i < names.length; i++) {
+            let hexColor = resolveHex(c[names[i]]);
+            if (!hexColor) continue;
+            let nextColor = Qt.color(hexColor);
+            if (root[names[i]].toString() !== nextColor.toString()) {
+                queue.push({ name: names[i], value: nextColor });
+            }
+        }
+
+        root._colorQueue = queue;
+        if (queue.length > 0) {
+            root._flushColorQueue();
+            if (root._colorQueue.length > 0) colorStepTimer.restart();
+        }
+    }
+
+    function _flushColorQueue() {
+        let n = Math.min(root.colorsPerFrame, root._colorQueue.length);
+        for (let i = 0; i < n; i++) {
+            let item = root._colorQueue[i];
+            root[item.name] = item.value;
+        }
+        root._colorQueue = root._colorQueue.slice(n);
+    }
+
+    Timer {
+        id: colorStepTimer
+        interval: 16
+        repeat: true
+        onTriggered: {
+            root._flushColorQueue();
+            if (root._colorQueue.length === 0) stop();
+        }
     }
 
     FileView {

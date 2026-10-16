@@ -407,6 +407,11 @@
         "desc": "تحديد عرض الشريط كنسبة مئوية من حجم الشاشة",
         "title": "عرض الشريط"
       },
+      "center_by_edges": {
+        "title": "التوسيط حسب الحواف",
+        "desc": "الحفاظ على هوامش متساوية على الحافتين اليسرى واليمنى للشريط بدلاً من التوسيط حسب الوحدة الوسطى",
+        "desc_vertical": "الحفاظ على هوامش متساوية على الحافتين العلوية والسفلية للشريط بدلاً من التوسيط حسب الوحدة الوسطى"
+      },
       "wifi": {
         "show_icon": {
           "desc": "عرض أيقونة الشبكة أو إشارة الاتصال",
@@ -441,9 +446,15 @@
         "title": "اختر عدد مساحات العمل المعروضة"
       },
       "media": {
-        "show_duration": {
-          "title": "عرض المدة",
-          "desc": "عرض الوقت المنقضي والمدة الإجمالية للأغنية الحالية"
+        "info_mode": {
+          "title": "Secondary info",
+          "desc": "Choose whether to show the song duration or its author",
+          "duration": "Duration",
+          "author": "Author"
+        },
+        "width": {
+          "title": "Width",
+          "desc": "Width of the song title area"
         },
         "show_icon": {
           "title": "عرض الأيقونة",
@@ -454,7 +465,8 @@
           "desc": "عرض أزرار السابق والتشغيل والتالي"
         },
         "preview": {
-          "title": "عنوان الأغنية"
+          "title": "عنوان الأغنية",
+          "author": "Song author"
         }
       }
     },
@@ -756,6 +768,10 @@
         "desc": "المهلة الزمنية والأمر التحذيري قبل تنفيذ الإجراء",
         "placeholder": "مثال: notify-send 'تحذير خمول'",
         "title": "أمر التحذير"
+      },
+      "lock_on_sleep": {
+        "title": "القفل قبل السكون",
+        "desc": "قفل الجلسة قبل تعليق النظام، مثل عند إغلاق الغطاء"
       }
     },
     "launcher": {
@@ -798,6 +814,10 @@
       "empty_graphic": {
         "desc": "عرض رسم القطة النائمة في مركز الإشعارات عندما يكون فارغًا",
         "title": "حركة المركز الفارغ"
+      },
+      "right_click_close": {
+        "title": "الإغلاق بالنقر الأيمن",
+        "desc": "إغلاق الإشعار بالنقر عليه بزر الماوس الأيمن"
       },
       "position": {
         "bottom_center": "أسفل الوسط",
@@ -1026,7 +1046,11 @@
     "deploy": {
       "configuring_sddm": "جارٍ تكوين مدير الجلسات SDDM...",
       "disabling_dm": "جارٍ تعطيل مدير تسجيل الدخول السابق ({dm})...",
-      "sddm_success": "-> تم تثبيت مظهر SDDM Material You وتمكين الخدمة [ تم بنجاح ]"
+      "sddm_success": "-> تم تثبيت مظهر SDDM Material You وتمكين الخدمة [ تم بنجاح ]",
+      "sddm_no_wayland_compositor": "لم يتم العثور على مركّب Wayland مدعوم لشاشة تسجيل الدخول (kwin_wayland/weston)، سيتم استخدام X11 لـ SDDM.",
+      "sddm_no_xorg": "لم يتم العثور على Xorg، سيتم استخدام {compositor} لـ SDDM.",
+      "sddm_no_backend": "لم يتم العثور على Xorg ولا على مركّب Wayland مدعوم لشاشة تسجيل الدخول (kwin_wayland/weston) في /usr/local/bin أو /usr/bin أو /bin.",
+      "sddm_skipped": "تم تخطي إعداد SDDM: لم يتم العثور على خادم عرض أو مركّب لشاشة تسجيل الدخول صالح للاستخدام. لم يتم تغيير مدير العرض الحالي."
     },
     "deps": {
       "all_installed": "-> جميع الحزم مثبتة بالفعل! تخطي مرحلة تنزيل الحزم.",
@@ -1113,6 +1137,11 @@
       "authenticating": "جارٍ التحقق...",
       "enter_pin": "أدخل رمز PIN",
       "locked": "مقفل"
+    },
+    "fingerprint": {
+      "ready": "المس المستشعر",
+      "not_recognized": "لم يتم التعرف على البصمة",
+      "recognized": "تم التعرف على البصمة"
     },
     "unknown": "غير معروف"
   },

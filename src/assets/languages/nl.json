@@ -101,6 +101,10 @@
         "title": "Animatie bij leeg meldingencentrum",
         "desc": "Toon de slapende kat-animatie in het meldingencentrum wanneer dit leeg is"
       },
+      "right_click_close": {
+        "title": "Sluiten met rechtsklik",
+        "desc": "Sluit een melding met een rechtsklik"
+      },
       "test": "Testmelding",
       "test_desc": "Dit is een testmelding"
     },
@@ -165,7 +169,11 @@
       "hooks": {
         "title": "Hooks (shell-opdrachten)"
       },
-      "custom_action_desc": "Aangepaste time-outactie en opdracht"
+      "custom_action_desc": "Aangepaste time-outactie en opdracht",
+      "lock_on_sleep": {
+        "title": "Vergrendelen voor slaapstand",
+        "desc": "Vergrendel de sessie voordat het systeem in de slaapstand gaat, bijvoorbeeld bij het sluiten van het scherm"
+      }
     },
     "welcome": {
       "by_author": "door @{author}",
@@ -323,6 +331,11 @@
       "width": {
         "title": "Breedte van balk",
         "desc": "Stel de breedte van de balk in als percentage"
+      },
+      "center_by_edges": {
+        "title": "Centreren op randen",
+        "desc": "Houd gelijke marges links en rechts van de balk aan in plaats van te centreren op de middelste module",
+        "desc_vertical": "Houd gelijke marges boven en onder de balk aan in plaats van te centreren op de middelste module"
       },
       "workspaces": {
         "title": "Kies het aantal weer te geven werkbladen",
@@ -531,9 +544,15 @@
         }
       },
       "media": {
-        "show_duration": {
-          "title": "Duur tonen",
-          "desc": "Toont de verstreken en totale tijd van het huidige nummer"
+        "info_mode": {
+          "title": "Secondary info",
+          "desc": "Choose whether to show the song duration or its author",
+          "duration": "Duration",
+          "author": "Author"
+        },
+        "width": {
+          "title": "Width",
+          "desc": "Width of the song title area"
         },
         "show_icon": {
           "title": "Pictogram tonen",
@@ -544,7 +563,8 @@
           "desc": "Toont de knoppen voor vorige, afspelen en volgende"
         },
         "preview": {
-          "title": "Titel van het nummer"
+          "title": "Titel van het nummer",
+          "author": "Song author"
         }
       }
     },
@@ -920,6 +940,11 @@
       "access_denied": "Toegang geweigerd",
       "authenticating": "Verifiëren...",
       "enter_pin": "Voer pincode in"
+    },
+    "fingerprint": {
+      "ready": "Raak de sensor aan",
+      "not_recognized": "Vingerafdruk niet herkend",
+      "recognized": "Vingerafdruk herkend"
     },
     "power": {
       "suspend": "Stand-by",
@@ -1501,7 +1526,11 @@
     "deploy": {
       "configuring_sddm": "SDDM-inlogbeheerder configureren...",
       "disabling_dm": "-> Conflicterende inlogbeheerder uitschakelen: {dm}",
-      "sddm_success": "-> SDDM Material You-thema geïnstalleerd en service ingeschakeld [ OK ]"
+      "sddm_success": "-> SDDM Material You-thema geïnstalleerd en service ingeschakeld [ OK ]",
+      "sddm_no_wayland_compositor": "Geen ondersteunde Wayland-compositor voor het inlogscherm (kwin_wayland/weston) gevonden, X11 wordt gebruikt voor SDDM.",
+      "sddm_no_xorg": "Xorg niet gevonden, {compositor} wordt gebruikt voor SDDM.",
+      "sddm_no_backend": "Noch Xorg noch een ondersteunde Wayland-compositor voor het inlogscherm (kwin_wayland/weston) is gevonden in /usr/local/bin, /usr/bin of /bin.",
+      "sddm_skipped": "SDDM-configuratie overgeslagen: geen bruikbare displayserver of inlogcompositor gevonden. De huidige displaymanager blijft ongewijzigd."
     }
   },
   "translator": {

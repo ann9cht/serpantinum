@@ -95,7 +95,7 @@ Item {
     property real targetHeight: (module && !module.moduleActive) ? 0 : baseHeight
 
     implicitHeight: targetHeight
-    implicitWidth: isPreview ? (barWindow ? barWindow.s(56) : 56) : (parent ? parent.width : 0)
+    implicitWidth: isPreview ? (barWindow ? barWindow.s(56) : 56) : (activeTarget ? activeTarget.width : 0)
 
     MouseArea {
         id: widgetMouse

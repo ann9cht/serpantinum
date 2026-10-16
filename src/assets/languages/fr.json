@@ -101,6 +101,10 @@
         "title": "Animation du centre vide",
         "desc": "Afficher l'animation du chat qui dort dans le centre de notifications lorsqu'il est vide"
       },
+      "right_click_close": {
+        "title": "Fermer avec le clic droit",
+        "desc": "Fermer une notification avec un clic droit"
+      },
       "test": "Notification de test",
       "test_desc": "Ceci est une notification de test"
     },
@@ -165,7 +169,11 @@
       "hooks": {
         "title": "Crochets (commandes shell)"
       },
-      "custom_action_desc": "Action et commande de délai personnalisées"
+      "custom_action_desc": "Action et commande de délai personnalisées",
+      "lock_on_sleep": {
+        "title": "Verrouiller avant la veille",
+        "desc": "Verrouiller la session avant la mise en veille du système, par exemple à la fermeture du capot"
+      }
     },
     "welcome": {
       "by_author": "par @{author}",
@@ -323,6 +331,11 @@
       "width": {
         "title": "Largeur de la barre",
         "desc": "Définir la largeur de la barre en pourcentage"
+      },
+      "center_by_edges": {
+        "title": "Centrer par les bords",
+        "desc": "Garde des marges égales à gauche et à droite de la barre au lieu de centrer sur le module central",
+        "desc_vertical": "Garde des marges égales en haut et en bas de la barre au lieu de centrer sur le module central"
       },
       "workspaces": {
         "title": "Choisir le nombre d'espaces de travail à afficher",
@@ -531,9 +544,15 @@
         }
       },
       "media": {
-        "show_duration": {
-          "title": "Afficher la durée",
-          "desc": "Afficher le temps écoulé et la durée totale du morceau en cours"
+        "info_mode": {
+          "title": "Secondary info",
+          "desc": "Choose whether to show the song duration or its author",
+          "duration": "Duration",
+          "author": "Author"
+        },
+        "width": {
+          "title": "Width",
+          "desc": "Width of the song title area"
         },
         "show_icon": {
           "title": "Afficher l'icône",
@@ -544,7 +563,8 @@
           "desc": "Afficher les boutons précédent, lecture et suivant"
         },
         "preview": {
-          "title": "Titre du morceau"
+          "title": "Titre du morceau",
+          "author": "Song author"
         }
       }
     },
@@ -920,6 +940,11 @@
       "access_denied": "Accès refusé",
       "authenticating": "Authentification...",
       "enter_pin": "Entrer le code PIN"
+    },
+    "fingerprint": {
+      "ready": "Touchez le capteur",
+      "not_recognized": "Empreinte non reconnue",
+      "recognized": "Empreinte reconnue"
     },
     "power": {
       "suspend": "Mettre en veille",
@@ -1501,7 +1526,11 @@
     "deploy": {
       "configuring_sddm": "Configuration du gestionnaire d'affichage SDDM...",
       "disabling_dm": "-> Désactivation du gestionnaire d'affichage en conflit : {dm}",
-      "sddm_success": "-> Thème SDDM Material You installé et service activé [ OK ]"
+      "sddm_success": "-> Thème SDDM Material You installé et service activé [ OK ]",
+      "sddm_no_wayland_compositor": "Aucun compositeur Wayland compatible pour l'écran de connexion (kwin_wayland/weston) trouvé, utilisation de X11 pour SDDM.",
+      "sddm_no_xorg": "Xorg introuvable, utilisation de {compositor} pour SDDM.",
+      "sddm_no_backend": "Ni Xorg ni un compositeur Wayland compatible pour l'écran de connexion (kwin_wayland/weston) n'ont été trouvés dans /usr/local/bin, /usr/bin ou /bin.",
+      "sddm_skipped": "Configuration de SDDM ignorée : aucun serveur d'affichage ni compositeur d'écran de connexion utilisable trouvé. Le gestionnaire de connexion actuel reste inchangé."
     }
   },
   "translator": {

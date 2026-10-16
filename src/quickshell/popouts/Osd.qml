@@ -273,7 +273,7 @@ PanelWindow {
 
     Timer {
         id: briCmdThrottle
-        interval: 400
+        interval: 120
         property int targetPct: -1
         onTriggered: {
             if (targetPct >= 0) {
@@ -636,7 +636,7 @@ PanelWindow {
                         if (osdWindow.kind === "brightness") {
                             OsdController.briVal = pct;
                             briCmdThrottle.targetPct = pct;
-                            if (!verticalSlider.isDragging) briCmdThrottle.restart();
+                            if (!briCmdThrottle.running) briCmdThrottle.start();
                         } else if (osdWindow.kind === "volume") {
                             cmdThrottle.targetPct = pct;
                             if (!cmdThrottle.running) cmdThrottle.start();
@@ -840,7 +840,7 @@ PanelWindow {
                         if (osdWindow.kind === "brightness") {
                             OsdController.briVal = pct;
                             briCmdThrottle.targetPct = pct;
-                            if (!horizontalSlider.isDragging) briCmdThrottle.restart();
+                            if (!briCmdThrottle.running) briCmdThrottle.start();
                         } else if (osdWindow.kind === "volume") {
                             cmdThrottle.targetPct = pct;
                             if (!cmdThrottle.running) cmdThrottle.start();

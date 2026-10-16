@@ -154,7 +154,7 @@ Rectangle {
 
             Timer {
                 id: briCmdThrottle
-                interval: 400
+                interval: 120
                 property int targetPct: -1
                 onTriggered: {
                     if (targetPct >= 0) {
@@ -204,7 +204,7 @@ Rectangle {
                     panel.sysBrightness = pct;
                     briSlider.value = pct;
                     briCmdThrottle.targetPct = pct;
-                    if (!briSlider.isDragging) briCmdThrottle.restart();
+                    if (!briCmdThrottle.running) briCmdThrottle.start();
                 }
             }
         }

@@ -101,6 +101,10 @@
         "title": "Boş merkez animasyonu",
         "desc": "Bildirim merkezi boşken uyuyan kedi görselini gösterin"
       },
+      "right_click_close": {
+        "title": "Sağ tıkla kapat",
+        "desc": "Bildirimi sağ tıklayarak kapat"
+      },
       "test": "Test bildirimi",
       "test_desc": "Bu bir test bildirimidir"
     },
@@ -165,7 +169,11 @@
       "hooks": {
         "title": "Kancalar (kabuk komutları)"
       },
-      "custom_action_desc": "Özel zaman aşımı eylemi ve komutu"
+      "custom_action_desc": "Özel zaman aşımı eylemi ve komutu",
+      "lock_on_sleep": {
+        "title": "Uykudan önce kilitle",
+        "desc": "Kapak kapatıldığında olduğu gibi sistem askıya alınmadan önce oturumu kilitle"
+      }
     },
     "welcome": {
       "by_author": "@{author} tarafından",
@@ -323,6 +331,11 @@
       "width": {
         "title": "Çubuk genişliği",
         "desc": "Çubuk genişliğini yüzde olarak ayarlayın"
+      },
+      "center_by_edges": {
+        "title": "Kenarlara göre ortala",
+        "desc": "Orta modüle göre ortalamak yerine çubuğun sol ve sağ kenarlarında eşit boşluk bırakır",
+        "desc_vertical": "Orta modüle göre ortalamak yerine çubuğun üst ve alt kenarlarında eşit boşluk bırakır"
       },
       "workspaces": {
         "title": "Görüntülenecek çalışma alanı miktarını seçin",
@@ -531,9 +544,15 @@
         }
       },
       "media": {
-        "show_duration": {
-          "title": "Süreyi göster",
-          "desc": "Geçerli şarkının geçen ve toplam süresini görüntüleyin"
+        "info_mode": {
+          "title": "Secondary info",
+          "desc": "Choose whether to show the song duration or its author",
+          "duration": "Duration",
+          "author": "Author"
+        },
+        "width": {
+          "title": "Width",
+          "desc": "Width of the song title area"
         },
         "show_icon": {
           "title": "Simgeyi göster",
@@ -544,7 +563,8 @@
           "desc": "Önceki, oynat ve sonraki düğmelerini görüntüleyin"
         },
         "preview": {
-          "title": "Şarkı adı"
+          "title": "Şarkı adı",
+          "author": "Song author"
         }
       }
     },
@@ -920,6 +940,11 @@
       "access_denied": "Erişim reddedildi",
       "authenticating": "Kimlik doğrulanıyor...",
       "enter_pin": "PIN girin"
+    },
+    "fingerprint": {
+      "ready": "Sensöre dokunun",
+      "not_recognized": "Parmak izi tanınmadı",
+      "recognized": "Parmak izi tanındı"
     },
     "power": {
       "suspend": "Askıya al",
@@ -1501,7 +1526,11 @@
     "deploy": {
       "configuring_sddm": "SDDM giriş yöneticisi yapılandırılıyor...",
       "disabling_dm": "-> Çakışan giriş yöneticisi devre dışı bırakılıyor: {dm}",
-      "sddm_success": "-> SDDM material you teması kuruldu ve hizmet etkinleştirildi [ TAMAM ]"
+      "sddm_success": "-> SDDM material you teması kuruldu ve hizmet etkinleştirildi [ TAMAM ]",
+      "sddm_no_wayland_compositor": "Giriş ekranı için desteklenen bir Wayland kompozitörü (kwin_wayland/weston) bulunamadı, SDDM için X11 kullanılıyor.",
+      "sddm_no_xorg": "Xorg bulunamadı, SDDM için {compositor} kullanılıyor.",
+      "sddm_no_backend": "/usr/local/bin, /usr/bin veya /bin içinde ne Xorg ne de giriş ekranı için desteklenen bir Wayland kompozitörü (kwin_wayland/weston) bulundu.",
+      "sddm_skipped": "SDDM kurulumu atlandı: kullanılabilir bir ekran sunucusu veya giriş kompozitörü bulunamadı. Mevcut ekran yöneticisi değiştirilmedi."
     }
   },
   "translator": {

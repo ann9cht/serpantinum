@@ -101,6 +101,10 @@
         "title": "پویانمایی مرکز خالی",
         "desc": "نمایش تصویر متحرک گربه خوابیده در مرکز اعلان‌ها هنگام خالی بودن"
       },
+      "right_click_close": {
+        "title": "بستن با کلیک راست",
+        "desc": "بستن اعلان با کلیک راست"
+      },
       "test": "اعلان آزمایشی",
       "test_desc": "این یک اعلان آزمایشی است"
     },
@@ -165,7 +169,11 @@
       "hooks": {
         "title": "قلاب‌ها (دستورات شل)"
       },
-      "custom_action_desc": "کنش و دستور سفارشی مهلت زمانی"
+      "custom_action_desc": "کنش و دستور سفارشی مهلت زمانی",
+      "lock_on_sleep": {
+        "title": "قفل پیش از خواب",
+        "desc": "قفل کردن نشست پیش از تعلیق سامانه، مانند بستن درب لپ‌تاپ"
+      }
     },
     "welcome": {
       "by_author": "توسط @{author}",
@@ -323,6 +331,11 @@
       "width": {
         "title": "پهنای نوار",
         "desc": "تنظیم پهنای نوار به صورت درصدی"
+      },
+      "center_by_edges": {
+        "title": "وسط‌چین بر اساس لبه‌ها",
+        "desc": "به جای وسط‌چین کردن بر اساس ماژول میانی، حاشیه‌های چپ و راست نوار را برابر نگه می‌دارد",
+        "desc_vertical": "به جای وسط‌چین کردن بر اساس ماژول میانی، حاشیه‌های بالا و پایین نوار را برابر نگه می‌دارد"
       },
       "workspaces": {
         "title": "انتخاب تعداد فضاهای کاری برای نمایش",
@@ -531,9 +544,15 @@
         }
       },
       "media": {
-        "show_duration": {
-          "title": "نمایش مدت زمان",
-          "desc": "نمایش زمان سپری‌شده و کل آهنگ فعلی"
+        "info_mode": {
+          "title": "Secondary info",
+          "desc": "Choose whether to show the song duration or its author",
+          "duration": "Duration",
+          "author": "Author"
+        },
+        "width": {
+          "title": "Width",
+          "desc": "Width of the song title area"
         },
         "show_icon": {
           "title": "نمایش نماد",
@@ -544,7 +563,8 @@
           "desc": "نمایش دکمه‌های قبلی، پخش و بعدی"
         },
         "preview": {
-          "title": "عنوان آهنگ"
+          "title": "عنوان آهنگ",
+          "author": "Song author"
         }
       }
     },
@@ -920,6 +940,11 @@
       "access_denied": "دسترسی رد شد",
       "authenticating": "در حال احراز هویت...",
       "enter_pin": "پین را وارد کنید"
+    },
+    "fingerprint": {
+      "ready": "حسگر را لمس کنید",
+      "not_recognized": "اثر انگشت شناسایی نشد",
+      "recognized": "اثر انگشت شناسایی شد"
     },
     "power": {
       "suspend": "تعلیق",
@@ -1501,7 +1526,11 @@
     "deploy": {
       "configuring_sddm": "در حال پیکربندی مدیر ورود SDDM...",
       "disabling_dm": "-> در حال غیرفعال‌سازی مدیر ورود ناسازگار: {dm}",
-      "sddm_success": "-> پوسته Material You برای SDDM نصب و سرویس فعال شد [ تأیید ]"
+      "sddm_success": "-> پوسته Material You برای SDDM نصب و سرویس فعال شد [ تأیید ]",
+      "sddm_no_wayland_compositor": "هیچ کامپوزیتور Wayland پشتیبانی‌شده‌ای برای صفحه ورود (kwin_wayland/weston) پیدا نشد، برای SDDM از X11 استفاده می‌شود.",
+      "sddm_no_xorg": "Xorg پیدا نشد، برای SDDM از {compositor} استفاده می‌شود.",
+      "sddm_no_backend": "نه Xorg و نه کامپوزیتور Wayland پشتیبانی‌شده برای صفحه ورود (kwin_wayland/weston) در /usr/local/bin، /usr/bin یا /bin پیدا شد.",
+      "sddm_skipped": "راه‌اندازی SDDM رد شد: هیچ سرور نمایش یا کامپوزیتور ورود قابل استفاده‌ای پیدا نشد. مدیر نمایش فعلی بدون تغییر باقی می‌ماند."
     }
   },
   "translator": {

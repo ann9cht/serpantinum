@@ -183,9 +183,12 @@ Variants {
                 property bool isNiri: false
                 property bool isSway: false
                 property bool isHyprland: false
+                readonly property bool isMango: MangoState.isMango
                 readonly property string myOutput: (dockWindow.screen && dockWindow.screen.name) ? dockWindow.screen.name : ""
                 readonly property int niriActiveIndex: NiriState.activeIndexFor(myOutput)
                 readonly property var niriOccupiedMap: NiriState.occupiedMap
+                readonly property int mangoActiveIndex: MangoState.activeIndexFor(myOutput)
+                readonly property var mangoOccupiedMap: MangoState.occupiedByOutput
                 property int swayActiveIndex: 0
                 property var swayOccupiedMap: ({})
 
@@ -195,6 +198,8 @@ Variants {
                         idx = niriActiveIndex;
                     } else if (isSway) {
                         idx = swayActiveIndex;
+                    } else if (isMango) {
+                        idx = mangoActiveIndex;
                     } else if (isHyprland || typeof Hyprland !== "undefined") {
                         const fw = (typeof Hyprland !== "undefined") ? Hyprland.focusedWorkspace : null;
                         if (!fw) return -1;
@@ -209,6 +214,9 @@ Variants {
                     }
                     if (isSway) {
                         return !!swayOccupiedMap[activeIndex];
+                    }
+                    if (isMango) {
+                        return !!(mangoOccupiedMap && MangoState.isOccupied(myOutput, activeIndex));
                     }
                     if (typeof Hyprland !== "undefined") {
                         let ws = null;
@@ -1159,6 +1167,9 @@ Variants {
                     if (dockWindow.isSway) {
                         swayPoller.running = true;
                     }
+                    if (dockWindow.isMango) {
+                        MangoState.subscribe();
+                    }
                     if (typeof WindowTracker !== "undefined") {
                         WindowTracker.subscribe();
                     }
@@ -1170,6 +1181,9 @@ Variants {
                 Component.onDestruction: {
                     if (dockWindow.isNiri) {
                         NiriState.unsubscribe();
+                    }
+                    if (dockWindow.isMango) {
+                        MangoState.unsubscribe();
                     }
                     if (typeof WindowTracker !== "undefined") {
                         WindowTracker.unsubscribe();

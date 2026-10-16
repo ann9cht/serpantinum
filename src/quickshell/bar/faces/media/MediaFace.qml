@@ -42,7 +42,19 @@ Item {
         return true;
     }
 
-    readonly property bool showDuration: readBool("mediaShowDuration", "mediaShowDuration")
+    function readValue(widgetKey, configKey, fallback) {
+        if (widget && widget !== root && widget[widgetKey] !== undefined) return widget[widgetKey];
+        if (module && module[widgetKey] !== undefined) return module[widgetKey];
+        let dummy = configRevision;
+        if (typeof Config !== "undefined" && Config.rawSettings && Config.rawSettings.bar) {
+            let bs = Config.rawSettings.bar;
+            if (bs[configKey] !== undefined) return bs[configKey];
+        }
+        return fallback;
+    }
+
+    readonly property string infoMode: readValue("mediaInfoMode", "mediaInfoMode", "duration")
+    readonly property real configuredWidth: Number(readValue("mediaWidth", "mediaWidth", 120))
     readonly property bool showIcon: readBool("mediaShowIcon", "mediaShowIcon")
     readonly property bool showControls: readBool("mediaShowControls", "mediaShowControls")
 
@@ -51,7 +63,7 @@ Item {
     property bool isMediaActive: isPreview || (player !== null && player.playbackState !== MprisPlaybackState.Stopped && player.trackTitle !== "")
     readonly property bool isPlaying: isPreview || (isMediaActive && (player ? (player.playbackState === MprisPlaybackState.Playing || player.isPlaying) : MprisController.isPlaying))
 
-    property real colWidth: barWindow ? barWindow.s(isCompact ? 116 : 120) : (isCompact ? 116 : 120)
+    property real colWidth: barWindow ? barWindow.s(configuredWidth - (isCompact ? 4 : 0)) : (configuredWidth - (isCompact ? 4 : 0))
     property real innerSpacing: barWindow ? barWindow.s(isCompact ? 6 : 8) : (isCompact ? 6 : 8)
     property real btnSpacing: barWindow ? barWindow.s(isCompact ? 3 : 4) : (isCompact ? 3 : 4)
     property real sidePadding: barWindow ? barWindow.s(isCompact ? 6 : 8) : (isCompact ? 6 : 8)
@@ -190,14 +202,16 @@ Item {
                         }
 
                         Text {
-                            text: root.isPreview ? "01:24 / 03:42" : (isMediaActive && player ? (root.formatTime(MprisController.livePosition) + " / " + root.formatTime(player.length)) : "")
+                            text: root.infoMode === "author"
+                                ? (root.isPreview ? I18n.t("guide.bar.media.preview.author", "Song author") : (isMediaActive && player ? (player.trackArtist || "") : ""))
+                                : (root.isPreview ? "01:24 / 03:42" : (isMediaActive && player ? (root.formatTime(MprisController.livePosition) + " / " + root.formatTime(player.length)) : ""))
                             font.family: ThemeBackend.fontFamily
                             font.weight: Font.Black
                             font.pixelSize: barWindow ? barWindow.s(root.isCompact ? 9 : 10) : (root.isCompact ? 9 : 10)
                             color: root.isCompact ? ThemeBackend.overlay2 : ThemeBackend.subtext0
                             width: parent.width
                             elide: Text.ElideRight
-                            visible: isMediaActive && root.showDuration
+                            visible: isMediaActive
                         }
                     }
                 }

@@ -184,10 +184,16 @@ Item {
         return true;
     }
 
-    property bool mediaShowDuration: {
+    property string mediaInfoMode: {
         let bs = Config.getSetting("bar", {});
-        if (bs && bs.mediaShowDuration !== undefined) return Boolean(bs.mediaShowDuration);
-        return true;
+        if (bs && bs.mediaInfoMode) return bs.mediaInfoMode;
+        return "duration";
+    }
+
+    property int mediaWidth: {
+        let bs = Config.getSetting("bar", {});
+        if (bs && bs.mediaWidth !== undefined) return Math.round(Number(bs.mediaWidth));
+        return 120;
     }
 
     property bool mediaShowIcon: {
@@ -340,7 +346,8 @@ Item {
         id: previewMediaWidgetObj
         function s(v) { return rootObj ? rootObj.s(v) : v; }
         property bool isCompact: false
-        property bool mediaShowDuration: barModulesRoot.mediaShowDuration
+        property string mediaInfoMode: barModulesRoot.mediaInfoMode
+        property int mediaWidth: barModulesRoot.mediaWidth
         property bool mediaShowIcon: barModulesRoot.mediaShowIcon
         property bool mediaShowControls: barModulesRoot.mediaShowControls
         property bool isPreview: true
@@ -518,11 +525,8 @@ Item {
             barModulesRoot.kbShowIcon = true;
         }
 
-        if (bs && bs.mediaShowDuration !== undefined) {
-            barModulesRoot.mediaShowDuration = Boolean(bs.mediaShowDuration);
-        } else {
-            barModulesRoot.mediaShowDuration = true;
-        }
+        barModulesRoot.mediaInfoMode = (bs && bs.mediaInfoMode) ? bs.mediaInfoMode : "duration";
+        barModulesRoot.mediaWidth = (bs && bs.mediaWidth !== undefined) ? Math.round(Number(bs.mediaWidth)) : 120;
 
         if (bs && bs.mediaShowIcon !== undefined) {
             barModulesRoot.mediaShowIcon = Boolean(bs.mediaShowIcon);
@@ -757,10 +761,16 @@ Item {
         Config.setSetting("bar", current);
     }
 
-    function setMediaShowDuration(val) {
-        barModulesRoot.mediaShowDuration = val;
+    function setMediaInfoMode(val) {
+        barModulesRoot.mediaInfoMode = val;
         let current = Config.getSetting("bar", {});
-        current.mediaShowDuration = val;
+        current.mediaInfoMode = val;
+        Config.setSetting("bar", current);
+    }
+
+    function setMediaWidth(val) {
+        let current = Config.getSetting("bar", {});
+        current.mediaWidth = val;
         Config.setSetting("bar", current);
     }
 
@@ -3393,25 +3403,71 @@ Item {
 
                     SettingsRow {
                         rootObj: barModulesRoot.rootObj
-                        settingId: "bar_media_show_duration"
-                        searchKeywords: "media song track duration time position length"
+                        settingId: "bar_media_info_mode"
+                        searchKeywords: "media song track duration time position length author artist"
                         baseColor: Qt.alpha(ThemeBackend.surface1, 0.35)
                         icon: "󰥔"
-                        title: I18n.t("guide.bar.media.show_duration.title", "Show duration")
-                        description: I18n.t("guide.bar.media.show_duration.desc", "Display the elapsed and total time of the current song")
+                        title: I18n.t("guide.bar.media.info_mode.title", "Secondary info")
+                        description: I18n.t("guide.bar.media.info_mode.desc", "Choose whether to show the song duration or its author")
                         visible: !barModulesRoot.isSideBar
                         searchable: !barModulesRoot.isSideBar
                         hiddenByConfig: barModulesRoot.isSideBar
 
-                        Toggle {
+                        Switch {
                             Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                            checked: barModulesRoot.mediaShowDuration
+                            implicitWidth: rootObj.s(200)
+                            implicitHeight: rootObj.s(32)
+                            cornerRadius: ThemeBackend.borderRadius
+                            fontPixelSize: rootObj.s(11)
+                            options: [
+                                I18n.t("guide.bar.media.info_mode.duration", "Duration"),
+                                I18n.t("guide.bar.media.info_mode.author", "Author")
+                            ]
+                            currentIndex: barModulesRoot.mediaInfoMode === "author" ? 1 : 0
                             accentColor: ThemeBackend.mauve
-                            baseColor: ThemeBackend.surface1
-                            handleColor: ThemeBackend.crust
-                            handleOffColor: ThemeBackend.text
-                            onToggled: function(c) {
-                                barModulesRoot.setMediaShowDuration(c);
+                            baseColor: ThemeBackend.surface0
+                            textColor: ThemeBackend.text
+                            activeTextColor: ThemeBackend.crust
+                            onToggled: function(idx) {
+                                barModulesRoot.setMediaInfoMode(idx === 1 ? "author" : "duration");
+                            }
+                        }
+                    }
+
+                    SettingsRow {
+                        rootObj: barModulesRoot.rootObj
+                        settingId: "bar_media_width"
+                        searchKeywords: "media song track size width length resize"
+                        baseColor: Qt.alpha(ThemeBackend.surface1, 0.35)
+                        icon: "󰩨"
+                        title: I18n.t("guide.bar.media.width.title", "Width")
+                        description: I18n.t("guide.bar.media.width.desc", "Width of the song title area")
+                        visible: !barModulesRoot.isSideBar
+                        searchable: !barModulesRoot.isSideBar
+                        hiddenByConfig: barModulesRoot.isSideBar
+
+                        Draggable {
+                            id: mediaSizeSlider
+                            Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                            Layout.rightMargin: rootObj.s(8)
+                            implicitWidth: rootObj.s(220)
+                            implicitHeight: rootObj.s(18)
+                            from: 80
+                            to: 300
+                            stepSize: 1
+                            defaultValue: 120
+                            showValueBubble: true
+                            valueFormatter: function(v) { return Math.round(v) + "px" }
+                            value: barModulesRoot.mediaWidth
+                            backgroundColor: ThemeBackend.surface0
+                            accentColor: ThemeBackend.mauve
+                            handleColor: ThemeBackend.text
+                            handleBorderColor: ThemeBackend.mantle
+                            onMoved: function(val) {
+                                barModulesRoot.mediaWidth = Math.round(val);
+                            }
+                            onDragFinished: {
+                                barModulesRoot.setMediaWidth(barModulesRoot.mediaWidth);
                             }
                         }
                     }

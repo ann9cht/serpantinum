@@ -101,6 +101,10 @@
         "title": "Animasi pusat kosong",
         "desc": "Tampilkan grafik kucing tidur di pusat notifikasi saat kosong"
       },
+      "right_click_close": {
+        "title": "Tutup dengan klik kanan",
+        "desc": "Tutup notifikasi dengan klik kanan"
+      },
       "test": "Uji notifikasi",
       "test_desc": "Ini adalah notifikasi uji coba"
     },
@@ -165,7 +169,11 @@
       "hooks": {
         "title": "Kait (perintah shell)"
       },
-      "custom_action_desc": "Tindakan batas waktu kustom dan perintah"
+      "custom_action_desc": "Tindakan batas waktu kustom dan perintah",
+      "lock_on_sleep": {
+        "title": "Kunci sebelum tidur",
+        "desc": "Kunci sesi sebelum sistem ditangguhkan, misalnya saat menutup layar laptop"
+      }
     },
     "welcome": {
       "by_author": "oleh @{author}",
@@ -323,6 +331,11 @@
       "width": {
         "title": "Lebar bilah",
         "desc": "Atur lebar bilah sebagai persentase"
+      },
+      "center_by_edges": {
+        "title": "Pusatkan menurut tepi",
+        "desc": "Menjaga margin yang sama di tepi kiri dan kanan bilah alih-alih memusatkan berdasarkan modul tengah",
+        "desc_vertical": "Menjaga margin yang sama di tepi atas dan bawah bilah alih-alih memusatkan berdasarkan modul tengah"
       },
       "workspaces": {
         "title": "Pilih jumlah ruang kerja yang akan ditampilkan",
@@ -531,9 +544,15 @@
         }
       },
       "media": {
-        "show_duration": {
-          "title": "Tampilkan durasi",
-          "desc": "Tampilkan waktu yang telah berlalu dan total durasi lagu saat ini"
+        "info_mode": {
+          "title": "Secondary info",
+          "desc": "Choose whether to show the song duration or its author",
+          "duration": "Duration",
+          "author": "Author"
+        },
+        "width": {
+          "title": "Width",
+          "desc": "Width of the song title area"
         },
         "show_icon": {
           "title": "Tampilkan ikon",
@@ -544,7 +563,8 @@
           "desc": "Tampilkan tombol sebelumnya, putar, dan berikutnya"
         },
         "preview": {
-          "title": "Judul lagu"
+          "title": "Judul lagu",
+          "author": "Song author"
         }
       }
     },
@@ -920,6 +940,11 @@
       "access_denied": "Akses ditolak",
       "authenticating": "Mengautentikasi...",
       "enter_pin": "Masukkan PIN"
+    },
+    "fingerprint": {
+      "ready": "Sentuh sensor",
+      "not_recognized": "Sidik jari tidak dikenali",
+      "recognized": "Sidik jari dikenali"
     },
     "power": {
       "suspend": "Suspensi",
@@ -1501,7 +1526,11 @@
     "deploy": {
       "configuring_sddm": "Mengonfigurasi manajer tampilan SDDM...",
       "disabling_dm": "-> Menonaktifkan manajer tampilan yang berkonflik: {dm}",
-      "sddm_success": "-> Tema Material You SDDM terinstal dan layanan diaktifkan [ OKE ]"
+      "sddm_success": "-> Tema Material You SDDM terinstal dan layanan diaktifkan [ OKE ]",
+      "sddm_no_wayland_compositor": "Compositor Wayland yang didukung untuk layar login (kwin_wayland/weston) tidak ditemukan, SDDM menggunakan X11.",
+      "sddm_no_xorg": "Xorg tidak ditemukan, SDDM menggunakan {compositor}.",
+      "sddm_no_backend": "Xorg maupun compositor Wayland yang didukung untuk layar login (kwin_wayland/weston) tidak ditemukan di /usr/local/bin, /usr/bin atau /bin.",
+      "sddm_skipped": "Pengaturan SDDM dilewati: tidak ada server tampilan atau compositor login yang dapat digunakan. Display manager saat ini tidak diubah."
     }
   },
   "translator": {

@@ -73,6 +73,11 @@
       "authenticating": "Uwierzytelnianie...",
       "enter_pin": "Wprowadź PIN"
     },
+    "fingerprint": {
+      "ready": "Dotknij czujnika",
+      "not_recognized": "Nie rozpoznano odcisku palca",
+      "recognized": "Rozpoznano odcisk palca"
+    },
     "power": {
       "suspend": "Uśpij",
       "reboot": "Uruchom ponownie",
@@ -653,7 +658,11 @@
     "deploy": {
       "configuring_sddm": "Konfigurowanie menedżera logowania SDDM...",
       "disabling_dm": "-> Wyłączanie konfliktującego menedżera logowania: {dm}",
-      "sddm_success": "-> Motyw Material You dla SDDM zainstalowany i usługa włączona [ OK ]"
+      "sddm_success": "-> Motyw Material You dla SDDM zainstalowany i usługa włączona [ OK ]",
+      "sddm_no_wayland_compositor": "Nie znaleziono obsługiwanego kompozytora Wayland dla ekranu logowania (kwin_wayland/weston), SDDM używa X11.",
+      "sddm_no_xorg": "Nie znaleziono Xorg, SDDM używa {compositor}.",
+      "sddm_no_backend": "Nie znaleziono ani Xorg, ani obsługiwanego kompozytora Wayland dla ekranu logowania (kwin_wayland/weston) w /usr/local/bin, /usr/bin ani /bin.",
+      "sddm_skipped": "Pominięto konfigurację SDDM: nie znaleziono użytecznego serwera wyświetlania ani kompozytora ekranu logowania. Obecny menedżer logowania pozostaje bez zmian."
     }
   },
   "translator": {
@@ -778,6 +787,10 @@
         "title": "Animacja pustego centrum",
         "desc": "Wyświetlaj grafikę śpiącego kota w centrum powiadomień, gdy jest puste"
       },
+      "right_click_close": {
+        "title": "Zamykaj prawym przyciskiem",
+        "desc": "Zamykaj powiadomienie prawym przyciskiem myszy"
+      },
       "test": "Powiadomienie testowe",
       "test_desc": "To jest powiadomienie testowe"
     },
@@ -842,7 +855,11 @@
       "hooks": {
         "title": "Uchwyty (polecenia powłoki)"
       },
-      "custom_action_desc": "Niestandardowa akcja bezczynności i polecenie"
+      "custom_action_desc": "Niestandardowa akcja bezczynności i polecenie",
+      "lock_on_sleep": {
+        "title": "Blokuj przed uśpieniem",
+        "desc": "Blokuj sesję przed uśpieniem systemu, na przykład po zamknięciu pokrywy"
+      }
     },
     "welcome": {
       "by_author": "autor: @{author}",
@@ -1000,6 +1017,11 @@
       "width": {
         "title": "Szerokość paska",
         "desc": "Ustaw szerokość paska w procentach"
+      },
+      "center_by_edges": {
+        "title": "Wyśrodkuj według krawędzi",
+        "desc": "Zachowuje równe marginesy po lewej i prawej stronie paska zamiast wyśrodkowania według środkowego modułu",
+        "desc_vertical": "Zachowuje równe marginesy u góry i na dole paska zamiast wyśrodkowania według środkowego modułu"
       },
       "workspaces": {
         "title": "Wybierz liczbę wyświetlanych obszarów roboczych",
@@ -1208,9 +1230,15 @@
         }
       },
       "media": {
-        "show_duration": {
-          "title": "Pokaż czas trwania",
-          "desc": "Wyświetlaj czas, który upłynął, i całkowity czas bieżącego utworu"
+        "info_mode": {
+          "title": "Secondary info",
+          "desc": "Choose whether to show the song duration or its author",
+          "duration": "Duration",
+          "author": "Author"
+        },
+        "width": {
+          "title": "Width",
+          "desc": "Width of the song title area"
         },
         "show_icon": {
           "title": "Pokaż ikonę",
@@ -1221,7 +1249,8 @@
           "desc": "Wyświetlaj przyciski poprzedni, odtwarzaj i następny"
         },
         "preview": {
-          "title": "Tytuł utworu"
+          "title": "Tytuł utworu",
+          "author": "Song author"
         }
       }
     },

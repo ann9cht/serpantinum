@@ -102,6 +102,10 @@
         "title": "Animación de centro vacío",
         "desc": "Mostrar el gráfico del gato durmiendo en el centro de notificaciones cuando esté vacío"
       },
+      "right_click_close": {
+        "title": "Cerrar con clic derecho",
+        "desc": "Descartar una notificación con clic derecho"
+      },
       "test": "Probar notificación",
       "test_desc": "Esta es una notificación de prueba"
     },
@@ -166,7 +170,11 @@
       "hooks": {
         "title": "Ganchos (comandos de shell)"
       },
-      "custom_action_desc": "Acción y comando personalizados por tiempo de espera"
+      "custom_action_desc": "Acción y comando personalizados por tiempo de espera",
+      "lock_on_sleep": {
+        "title": "Bloquear antes de suspender",
+        "desc": "Bloquear la sesión antes de que el sistema se suspenda, por ejemplo al cerrar la tapa"
+      }
     },
     "welcome": {
       "by_author": "por @{author}",
@@ -324,6 +332,11 @@
       "width": {
         "title": "Ancho de la barra",
         "desc": "Establecer el ancho de la barra como porcentaje"
+      },
+      "center_by_edges": {
+        "title": "Centrar por los bordes",
+        "desc": "Mantiene márgenes iguales a izquierda y derecha de la barra en lugar de centrar por el módulo central",
+        "desc_vertical": "Mantiene márgenes iguales arriba y abajo de la barra en lugar de centrar por el módulo central"
       },
       "workspaces": {
         "title": "Elegir cantidad de espacios de trabajo a mostrar",
@@ -532,9 +545,15 @@
         }
       },
       "media": {
-        "show_duration": {
-          "title": "Mostrar duración",
-          "desc": "Muestra el tiempo transcurrido y total de la canción actual"
+        "info_mode": {
+          "title": "Secondary info",
+          "desc": "Choose whether to show the song duration or its author",
+          "duration": "Duration",
+          "author": "Author"
+        },
+        "width": {
+          "title": "Width",
+          "desc": "Width of the song title area"
         },
         "show_icon": {
           "title": "Mostrar icono",
@@ -545,7 +564,8 @@
           "desc": "Muestra los botones de anterior, reproducir y siguiente"
         },
         "preview": {
-          "title": "Título de la canción"
+          "title": "Título de la canción",
+          "author": "Song author"
         }
       }
     },
@@ -964,6 +984,11 @@
       "access_denied": "Acceso denegado",
       "authenticating": "Autenticando...",
       "enter_pin": "Introduce el PIN"
+    },
+    "fingerprint": {
+      "ready": "Toca el sensor",
+      "not_recognized": "Huella no reconocida",
+      "recognized": "Huella reconocida"
     },
     "power": {
       "suspend": "Suspender",
@@ -1545,7 +1570,11 @@
     "deploy": {
       "configuring_sddm": "Configurando el gestor de pantalla SDDM...",
       "disabling_dm": "-> Deshabilitando gestor de pantalla en conflicto: {dm}",
-      "sddm_success": "-> Tema material you para SDDM instalado y servicio habilitado [ OK ]"
+      "sddm_success": "-> Tema material you para SDDM instalado y servicio habilitado [ OK ]",
+      "sddm_no_wayland_compositor": "No se encontró un compositor Wayland compatible para la pantalla de inicio de sesión (kwin_wayland/weston), se usa X11 para SDDM.",
+      "sddm_no_xorg": "No se encontró Xorg, se usa {compositor} para SDDM.",
+      "sddm_no_backend": "No se encontró Xorg ni un compositor Wayland compatible para la pantalla de inicio de sesión (kwin_wayland/weston) en /usr/local/bin, /usr/bin o /bin.",
+      "sddm_skipped": "Se omite la configuración de SDDM: no se encontró un servidor gráfico ni un compositor de inicio de sesión utilizable. El gestor de pantalla actual no se modifica."
     }
   },
   "translator": {
