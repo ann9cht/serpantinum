@@ -360,7 +360,7 @@
         "info": "Ghi hình/Hẹn giờ",
         "weather": "Thời tiết",
         "notifications": "Thông báo",
-        "usage": "Sử dụng hệ thống",
+        "usage": "Tài nguyên hệ thống",
         "clock": "Đồng hồ"
       },
       "position": {
@@ -587,13 +587,13 @@
       "media": {
         "info_mode": {
           "title": "Thông tin phụ",
-          "desc": "Chọn hiển thị thời lượng bài hát hoặc tác giả",
+          "desc": "Chọn hiển thị thời lượng hay nghệ sĩ của bài hát",
           "duration": "Thời lượng",
-          "author": "Tác giả"
+          "author": "Nghệ sĩ"
         },
         "width": {
           "title": "Chiều rộng",
-          "desc": "Chiều rộng của vùng tên bài hát"
+          "desc": "Chiều rộng vùng hiển thị tên bài hát"
         },
         "show_icon": {
           "title": "Hiển thị biểu tượng",
@@ -605,7 +605,7 @@
         },
         "preview": {
           "title": "Tên bài hát",
-          "author": "Tác giả bài hát"
+          "author": "Nghệ sĩ"
         }
       },
       "thickness": {
@@ -795,11 +795,11 @@
       "day": "Ngày",
       "week": "Tuần",
       "screen_time": "Thời gian sử dụng màn hình",
-      "less_than_prev": "Ít hơn {time} so với hôm qua",
-      "more_than_prev": "Nhiều hơn {time} so với hôm qua",
-      "same_as_prev": "Bằng hôm qua",
-      "limit_progress": "{used} / giới hạn {limit} hằng ngày",
-      "limit_reached": "Đã đạt giới hạn {limit} hằng ngày",
+      "less_than_prev": "Ít hơn hôm qua {time}",
+      "more_than_prev": "Nhiều hơn hôm qua {time}",
+      "same_as_prev": "Giống hôm qua",
+      "limit_progress": "{used} / {limit} (giới hạn hằng ngày)",
+      "limit_reached": "Đã đạt giới hạn hằng ngày ({limit})",
       "peak_hour": "Giờ cao điểm",
       "week_total": "Tổng cả tuần",
       "less": "Ít hơn",
@@ -961,7 +961,7 @@
         "new_window": "Cửa sổ mới",
         "pin": "Ghim vào dock",
         "unpin": "Bỏ ghim khỏi dock",
-        "untitled": "Không có tiêu đề"
+        "untitled": "Chưa có tiêu đề"
       },
       "background": {
         "title": "Vẽ nền phía sau ứng dụng",
@@ -1067,13 +1067,13 @@
       "access_denied": "Truy cập bị từ chối",
       "authenticating": "Đang xác thực...",
       "enter_pin": "Nhập mã PIN",
-      "too_many_attempts": "Quá nhiều lần thử"
+      "too_many_attempts": "Thử quá nhiều lần"
     },
     "fingerprint": {
       "ready": "Chạm vào cảm biến",
       "not_recognized": "Không nhận diện được vân tay",
       "recognized": "Đã nhận diện vân tay",
-      "blocked": "Đã tắt trình đọc vân tay"
+      "blocked": "Vân tay đã bị tắt"
     },
     "power": {
       "suspend": "Ngủ",
@@ -1272,11 +1272,11 @@
       "hex": "Hex",
       "notification": {
         "app_name": "DrawAction",
-        "saved_title": "Đã lưu bản vẽ",
-        "copied_title": "Đã sao chép bản vẽ",
-        "copied_body": "Đã sao chép bản vẽ vào bộ nhớ tạm",
-        "failed_title": "Xuất thất bại",
-        "failed_body": "Không thể lưu bản vẽ"
+        "saved_title": "Đã lưu hình vẽ",
+        "copied_title": "Đã sao chép hình vẽ",
+        "copied_body": "Đã sao chép hình vẽ vào bộ nhớ tạm",
+        "failed_title": "Không xuất được",
+        "failed_body": "Không lưu được hình vẽ"
       },
       "palette": "Bảng màu",
       "palette_default": "Mặc định"
@@ -1604,10 +1604,10 @@
     "settings": {
       "lyricsLines": "Dòng",
       "lyricsAlignment": "Căn chỉnh",
-      "usageStyle": "Kiểu",
-      "lineThickness": "Độ dày",
-      "visualizerStyle": "Kiểu trình trực quan hóa",
-      "showNoLyrics": "Hiện chữ \"không có lời bài hát\""
+      "usageStyle": "Kiểu hiển thị",
+      "lineThickness": "Độ dày nét",
+      "visualizerStyle": "Kiểu trình hiển thị âm thanh",
+      "showNoLyrics": "Hiện chữ \"Không có lời bài hát\""
     },
     "align": {
       "left": "Trái",
@@ -1805,7 +1805,7 @@
       "installing_pkg": "Đang cài đặt {pkg}...",
       "install_ok": "Đã cài đặt thành công {pkg}",
       "install_failed": "Cài đặt thất bại {pkg}",
-      "quickshell_outdated": "Quickshell {version} quá cũ, cần bản {minimum} trở lên. Đang cập nhật...",
+      "quickshell_outdated": "Quickshell {version} đã cũ, yêu cầu phiên bản {minimum} trở lên. Đang cập nhật...",
       "quickshell_still_old": "Quickshell vẫn cũ hơn {minimum}. Hãy cập nhật thủ công, nếu không phần cài đặt sẽ không mở được."
     },
     "deploy": {
@@ -1842,7 +1842,7 @@
     "full_date": "dddd, d MMMM",
     "just_now": "Vừa xong",
     "minutes_ago": "{mins} phút trước",
-    "yesterday": "Hôm qua {time}"
+    "yesterday": "Hôm qua lúc {time}"
   },
   "common": {
     "select": "Chọn..."
