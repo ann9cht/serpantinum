@@ -2,7 +2,7 @@ name: bump-ski
 
 on:
   schedule:
-    - cron: "17 */6 * * *"
+    - cron: "17 */3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -17,14 +17,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}
+      BASE_BRANCH: ${{ github.event.repository.default_branch }}
     steps:
       - uses: actions/checkout@v7
-
-      - uses: cachix/install-nix-action@v31
         with:
-          extra_nix_config: |
-            experimental-features = nix-command flakes
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+          ref: ${{ github.event.repository.default_branch }}
 
       - name: Check for a newer Ski release
         id: ski
@@ -36,6 +33,13 @@ jobs:
           if [ "$(printf '%s\n' "$current" "$latest" | sort -V | tail -1)" = "$current" ]; then
             echo "up_to_date=true" >> "$GITHUB_OUTPUT"
           fi
+
+      - uses: cachix/install-nix-action@v31
+        if: steps.ski.outputs.up_to_date != 'true'
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
       - name: Bump flake.lock and PKGBUILDs
         id: bump
@@ -78,17 +82,17 @@ jobs:
             exit 0
           fi
           if ! git ls-remote --exit-code --heads origin "$branch" >/dev/null; then
-            # commits need an author identity; the runner has none, so use the Actions bot
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git checkout -b "$branch"
             git commit -am "chore: bump bundled Ski to $LATEST in the AUR packages and flake lock"
             git push -u origin "$branch"
           fi
+
           for attempt in 1 2 3; do
             if gh pr create \
               --repo "$GITHUB_REPOSITORY" \
-              --base "$GITHUB_REF_NAME" \
+              --base "$BASE_BRANCH" \
               --head "$branch" \
               --title "chore: bump bundled Ski to $LATEST" \
               --body "Automated bump of Ski $LATEST: flake.lock plus _skiver and the checksum in both AUR PKGBUILDs."; then
