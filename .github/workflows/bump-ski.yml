@@ -85,9 +85,17 @@ jobs:
             git commit -am "chore: bump bundled Ski to $LATEST in the AUR packages and flake lock"
             git push -u origin "$branch"
           fi
-          gh pr create \
-            --repo "$GITHUB_REPOSITORY" \
-            --base "$GITHUB_REF_NAME" \
-            --head "$branch" \
-            --title "chore: bump bundled Ski to $LATEST" \
-            --body "Automated bump of Ski $LATEST: flake.lock plus _skiver and the checksum in both AUR PKGBUILDs."
+          for attempt in 1 2 3; do
+            if gh pr create \
+              --repo "$GITHUB_REPOSITORY" \
+              --base "$GITHUB_REF_NAME" \
+              --head "$branch" \
+              --title "chore: bump bundled Ski to $LATEST" \
+              --body "Automated bump of Ski $LATEST: flake.lock plus _skiver and the checksum in both AUR PKGBUILDs."; then
+              exit 0
+            fi
+            echo "::warning::gh pr create failed (attempt $attempt/3), retrying in 20s"
+            sleep 20
+          done
+          echo "::error::gh pr create failed after 3 attempts"
+          exit 1
