@@ -77,7 +77,7 @@ jobs:
           LATEST: ${{ steps.ski.outputs.latest }}
         run: |
           branch="bump-ski-$LATEST"
-          if [ -n "$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$branch" --state all --json number --jq '.[0].number')" ]; then
+          if [ -n "$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$branch" --state open --json number --jq '.[0].number')" ]; then
             echo "A PR for $branch already exists"
             exit 0
           fi
