@@ -1,0 +1,91 @@
+name: bump-ski
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: bump-ski
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check for a newer Ski release
+        id: ski
+        run: |
+          latest=$(gh api repos/ilyamiro/Ski/releases/latest --jq .tag_name | sed 's/^v//')
+          current=$(sed -n 's/^_skiver=//p' packaging/aur/serpantinum/PKGBUILD)
+          echo "latest=$latest" >> "$GITHUB_OUTPUT"
+          echo "current=$current" >> "$GITHUB_OUTPUT"
+          if [ "$(printf '%s\n' "$current" "$latest" | sort -V | tail -1)" = "$current" ]; then
+            echo "up_to_date=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Bump flake.lock and PKGBUILDs
+        id: bump
+        if: steps.ski.outputs.up_to_date != 'true'
+        env:
+          LATEST: ${{ steps.ski.outputs.latest }}
+          CURRENT: ${{ steps.ski.outputs.current }}
+        run: |
+          nix flake update ski
+          rev=$(jq -r .nodes.ski.locked.rev flake.lock)
+          locked=$(curl -fsSL "https://raw.githubusercontent.com/ilyamiro/Ski/$rev/nix/release.json" | jq -r .version)
+          if [ "$locked" != "$LATEST" ]; then
+            echo "::notice::Ski $LATEST is out but release.json on master still says $locked; will retry next run"
+            git checkout flake.lock
+            exit 0
+          fi
+
+          base=https://github.com/ilyamiro/Ski/releases/download
+          old=$(curl -fsSL "$base/v$CURRENT/SHA256SUMS" | awk '/x86_64-linux.tar.gz/ {print $1}')
+          new=$(curl -fsSL "$base/v$LATEST/SHA256SUMS" | awk '/x86_64-linux.tar.gz/ {print $1}')
+          if [ -z "$old" ] || [ -z "$new" ]; then
+            echo "::error::could not read SHA256SUMS"
+            exit 1
+          fi
+
+          for f in packaging/aur/serpantinum/PKGBUILD packaging/aur/serpantinum-git/PKGBUILD; do
+            sed -i "s/^_skiver=.*/_skiver=$LATEST/; s/$old/$new/" "$f"
+            grep -q "$new" "$f" || { echo "::error::hash not replaced in $f"; exit 1; }
+          done
+          echo "bumped=true" >> "$GITHUB_OUTPUT"
+
+      - name: Open pull request
+        if: steps.bump.outputs.bumped == 'true'
+        env:
+          LATEST: ${{ steps.ski.outputs.latest }}
+        run: |
+          branch="bump-ski-$LATEST"
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null; then
+            echo "PR branch already exists"
+            exit 0
+          fi
+          # commits need an author identity; the runner has none, so use the Actions bot
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git commit -am "chore: bump bundled Ski to $LATEST in the AUR packages and flake lock"
+          git push -u origin "$branch"
+          gh pr create \
+            --repo "$GITHUB_REPOSITORY" \
+            --base "$GITHUB_REF_NAME" \
+            --head "$branch" \
+            --title "chore: bump bundled Ski to $LATEST" \
+            --body "Automated bump of Ski $LATEST: flake.lock plus _skiver and the checksum in both AUR PKGBUILDs."
