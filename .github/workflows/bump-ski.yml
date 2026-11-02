@@ -67,28 +67,27 @@ jobs:
           done
           echo "bumped=true" >> "$GITHUB_OUTPUT"
 
-      - name: Open pull request
-      if: steps.bump.outputs.bumped == 'true'
-      env:
-        LATEST: ${{ steps.ski.outputs.latest }}
-      run: |
-        branch="bump-ski-$LATEST"
-        if [ -n "$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$branch" --state all --json number --jq '.[0].number')" ]; then
-          echo "A PR for $branch already exists"
-          exit 0
-        fi
-        if ! git ls-remote --exit-code --heads origin "$branch" >/dev/null; then
-          # commits need an author identity; the runner has none, so use the Actions bot
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git checkout -b "$branch"
-          git commit -am "chore: bump bundled Ski to $LATEST in the AUR packages and flake lock"
-          git push -u origin "$branch"
-        fi
-        gh pr create \
-          --repo "$GITHUB_REPOSITORY" \
-          --base "$GITHUB_REF_NAME" \
-          --head "$branch" \
-          --title "chore: bump bundled Ski to $LATEST" \
-          --body "Automated bump of Ski $LATEST: flake.lock plus _skiver and the checksum in both AUR PKGBUILDs."
-
+            - name: Open pull request
+            if: steps.bump.outputs.bumped == 'true'
+            env:
+              LATEST: ${{ steps.ski.outputs.latest }}
+            run: |
+              branch="bump-ski-$LATEST"
+              if [ -n "$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$branch" --state all --json number --jq '.[0].number')" ]; then
+                echo "A PR for $branch already exists"
+                exit 0
+              fi
+              if ! git ls-remote --exit-code --heads origin "$branch" >/dev/null; then
+                # commits need an author identity; the runner has none, so use the Actions bot
+                git config user.name "github-actions[bot]"
+                git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+                git checkout -b "$branch"
+                git commit -am "chore: bump bundled Ski to $LATEST in the AUR packages and flake lock"
+                git push -u origin "$branch"
+              fi
+              gh pr create \
+                --repo "$GITHUB_REPOSITORY" \
+                --base "$GITHUB_REF_NAME" \
+                --head "$branch" \
+                --title "chore: bump bundled Ski to $LATEST" \
+                --body "Automated bump of Ski $LATEST: flake.lock plus _skiver and the checksum in both AUR PKGBUILDs."
